@@ -1,1 +1,1 @@
-# fotan
+Fotan Central Schools
