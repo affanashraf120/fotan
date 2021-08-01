@@ -1,10 +1,15 @@
 /* eslint-disable react/no-array-index-key, react/no-danger */
+import { withWidth } from '@material-ui/core';
 import classnames from 'classnames';
 import React, { useEffect, useRef, useState } from 'react';
 // import Headroom from 'react-headroom';
 import { Link, NavLink } from 'react-router-dom';
 import { scroller } from 'react-scroll';
+import Ticker from 'react-ticker';
 import {
+  Button,
+  Card,
+  CardBody,
   Carousel,
   CarouselCaption,
   CarouselControl,
@@ -14,11 +19,13 @@ import {
   Container,
   Row,
 } from 'reactstrap';
-import { withWidth } from '@material-ui/core';
-import Ticker from 'react-ticker';
+import GlideComponent from '../components/carousel/GlideComponent';
+import { Colxx } from '../components/common/CustomBootstrap';
 // import GlideComponent from '../components/carousel/GlideComponent';
 import LoginModal from '../fotan/components/LoginModal';
 import MapBlock from '../fotan/components/MapBlock';
+import cardList from '../fotan/data/cardItems';
+import footerMenuList from '../fotan/data/footerMenuList';
 import menuList from '../fotan/data/navMenuList';
 
 // const schoolPostor = '/assets/img/fotan/school.jpg';
@@ -46,6 +53,36 @@ const items = [
     caption: 'Slide 2',
   },
 ];
+
+const NoControlCarouselItem = ({ title, img, detail }) => {
+  return (
+    <div className="glide-item">
+      <Card>
+        <div className="position-relative">
+          <img className="card-img-top" src={img} alt={title} />
+        </div>
+        <CardBody style={{ textAlign: 'center' }}>
+          <h3>{title}</h3>
+          <p
+            className=" text-small mb-0 font-weight-light"
+            style={{ height: '200px' }}
+          >
+            {detail}
+          </p>
+          {title.includes('Apply') ? (
+            <Button color="primary" className="mb-2">
+              Apply Now
+            </Button>
+          ) : (
+            <Button outline color="primary" className="mb-2">
+              Read More
+            </Button>
+          )}
+        </CardBody>
+      </Card>
+    </div>
+  );
+};
 
 const Home = (props) => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
@@ -421,33 +458,36 @@ const Home = (props) => {
             <div className="container" id="layouts">
               <div className="row">
                 <div className="col-12 offset-0 col-lg-8 offset-lg-2 text-center">
-                  {/* <h1>Location</h1>
+                  {/* <h1>title</h1>
                   <p>
-                    We did our best to create layouts for various needs that
-                    developers might have and best experience for users.
-                    <br />
-                    They are clean and slick. They function well and look good
-                    at the same time.
+                    subtitle
                   </p> */}
                 </div>
               </div>
-
-              {/* <div className="row pt-5">
-                {layouts.map((l, index) => (
-                  <div
-                    key={`layout_${index}`}
-                    className="col-12 col-xs-6 col-sm-6 col-md-4 col-lg-3 mb-5"
+              <Row>
+                <Colxx xxs="12" className="pl-0 pr-0 mb-5">
+                  <GlideComponent
+                    settings={{
+                      gap: 5,
+                      perView: 3,
+                      type: 'carousel',
+                      breakpoints: {
+                        600: { perView: 1 },
+                        1400: { perView: 2 },
+                      },
+                      hideNav: true,
+                    }}
                   >
-                    <img
-                      className="img-fluid border-radius depth-2 mb-3 semi-rounded"
-                      alt={l.title}
-                      src={l.img}
-                    />
-                    <h4 className="text-center">{l.title}</h4>
-                  </div>
-                ))}
-              </div> */}
-              {/* <MapBlock /> */}
+                    {cardList.map((item) => {
+                      return (
+                        <div key={item.id}>
+                          <NoControlCarouselItem {...item} />
+                        </div>
+                      );
+                    })}
+                  </GlideComponent>
+                </Colxx>
+              </Row>
             </div>
           </div>
 
@@ -550,7 +590,6 @@ const Home = (props) => {
               </div>
             </div>
           </div>
-
           <Container
             style={{
               width: '100%',
@@ -562,46 +601,19 @@ const Home = (props) => {
             <div className="text-center">
               <Container>
                 <Row>
-                  <Col xs="6" lg="4">
-                    <NavLink
-                      style={{ textDecorationLine: 'underline', margin: '5px' }}
-                      to="#"
-                    >
-                      About Fotan
-                    </NavLink>
-                  </Col>
-                  <Col xs="6" lg="4">
-                    <NavLink
-                      style={{ textDecorationLine: 'underline', margin: '5px' }}
-                      to="#"
-                    >
-                      Alumni
-                    </NavLink>
-                  </Col>
-                  <Col xs="6" lg="4">
-                    <NavLink
-                      style={{ textDecorationLine: 'underline', margin: '5px' }}
-                      to="#"
-                    >
-                      Admissions
-                    </NavLink>
-                  </Col>
-                  <Col xs="6" lg="4">
-                    <NavLink
-                      style={{ textDecorationLine: 'underline', margin: '5px' }}
-                      to="#"
-                    >
-                      Careers
-                    </NavLink>
-                  </Col>
-                  <Col xs="6" lg="4">
-                    <NavLink
-                      style={{ textDecorationLine: 'underline', margin: '5px' }}
-                      to="#"
-                    >
-                      Our Schools
-                    </NavLink>
-                  </Col>
+                  {footerMenuList.map((item, index) => (
+                    <Col key={index} xs="6" lg="4">
+                      <NavLink
+                        style={{
+                          textDecorationLine: 'underline',
+                          margin: '5px',
+                        }}
+                        to={item.url}
+                      >
+                        {item.name}
+                      </NavLink>
+                    </Col>
+                  ))}
                 </Row>
               </Container>
             </div>
