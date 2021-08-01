@@ -383,39 +383,42 @@ const Home = (props) => {
             />
           </Carousel>
 
-          <div className="section mb-0">
-            <div className="row" style={{ marginTop: '1rem' }}>
-              <div className="col-12 offset-0 col-lg-8 offset-lg-2 text-center">
-                <h1>News & Updates</h1>
-              </div>
-            </div>
+          <div style={{ marginTop: '1rem' }} />
+
+          <div className="row">
             <div
-              style={{
-                width: '100%',
-                backgroundColor: '#a73f3f',
-              }}
-              onMouseEnter={stopMove}
-              onMouseLeave={startMove}
+              className="col-12 offset-0 col-lg-8 offset-lg-2 text-center"
+              style={{ marginTop: '0' }}
             >
-              <Ticker move={move}>
-                {() => (
-                  <div style={{ display: 'flex' }}>
-                    <h3
-                      style={{
-                        color: 'white',
-                        textAlign: 'center',
-                        alignSelf: 'center',
-                      }}
-                    >
-                      School activities have been continued in campus with
-                      strict SOPs for the safety of students and staff.{'  '}{' '}
-                      Teachers and managment is working hard to fill the
-                      education gap as annual exams are approaching.
-                    </h3>
-                  </div>
-                )}
-              </Ticker>
+              <h1>News & Updates</h1>
             </div>
+          </div>
+          <div
+            style={{
+              width: '100%',
+              backgroundColor: '#a73f3f',
+            }}
+            onMouseEnter={stopMove}
+            onMouseLeave={startMove}
+          >
+            <Ticker move={move}>
+              {() => (
+                <div style={{ display: 'flex' }}>
+                  <h3
+                    style={{
+                      color: 'white',
+                      textAlign: 'center',
+                      alignSelf: 'center',
+                    }}
+                  >
+                    School activities have been continued in campus with strict
+                    SOPs for the safety of students and staff.{'  '} Teachers
+                    and managment is working hard to fill the education gap as
+                    annual exams are approaching.
+                  </h3>
+                </div>
+              )}
+            </Ticker>
           </div>
 
           <div className="section mb-0">
@@ -423,33 +426,39 @@ const Home = (props) => {
               <div className="row">
                 <div className="col-12 offset-0 col-lg-8 offset-lg-2 text-center">
                   <h1>Message of Worthy Chairman</h1>
-                  <p>Founder & Principal of Fotan Central Schools</p>
+                  <h3>Founder & Principal of Fotan Central Schools</h3>
                 </div>
               </div>
 
+              <div style={{ marginTop: '1rem' }} />
+
               <div className="row feature-row">
-                <div className="col-12 col-md-6 col-lg-5 d-flex align-items-center">
-                  <div className="feature-text-container">
-                    <h1>Waqas Ashraf</h1>
-                    <div
-                      style={{ fontSize: '1.5rem' }}
-                      dangerouslySetInnerHTML={{
-                        __html: ` بچوں کو بس اللہ کا تعارف کروا دیجیے، دنیا کی مادی دوڑ سے
+                <Container>
+                  <Row>
+                    <Col xs="12" sm="8">
+                      <div className="feature-text-container">
+                        <h1>Waqas Ashraf</h1>
+                        <div
+                          style={{ fontSize: '1.5rem' }}
+                          dangerouslySetInnerHTML={{
+                            __html: ` بچوں کو بس اللہ کا تعارف کروا دیجیے، دنیا کی مادی دوڑ سے
                         بچا کر حقیقی خوشی سے روشناس کروانے کی کوششوں میں لگے رہیے۔
                         <br />`,
-                      }}
-                    />
-                  </div>
-                </div>
-                <div className="col-12 col-md-6 col-lg-6 offset-lg-1 offset-md-0 position-relative">
-                  <img
-                    alt="Chairperson"
-                    src={chairPerson}
-                    style={{ borderRadius: '50%' }}
-                    width="100%"
-                    className="feature-image-right feature-image-charts position-relative"
-                  />
-                </div>
+                          }}
+                        />
+                      </div>
+                    </Col>
+                    <Col xs="12" sm="4">
+                      <img
+                        alt="Chairperson"
+                        src={chairPerson}
+                        style={{ borderRadius: '50%', marginTop: '16px' }}
+                        width="100%"
+                        className="feature-image-right feature-image-charts position-relative"
+                      />
+                    </Col>
+                  </Row>
+                </Container>
               </div>
             </div>
           </div>
