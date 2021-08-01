@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key, react/no-danger */
 import classnames from 'classnames';
-import React, { useEffect, useRef, useState } from 'react';
-import Headroom from 'react-headroom';
+import React, { useEffect, useState } from 'react';
+// import Headroom from 'react-headroom';
 import { Link } from 'react-router-dom';
 import { scroller } from 'react-scroll';
 import {
@@ -11,6 +11,8 @@ import {
   CarouselIndicators,
   CarouselItem,
 } from 'reactstrap';
+import { withWidth } from '@material-ui/core';
+import Ticker from 'react-ticker';
 // import GlideComponent from '../components/carousel/GlideComponent';
 import { buyUrl } from '../constants/defaultValues';
 import LoginModal from '../fotan/components/LoginModal';
@@ -24,31 +26,35 @@ const logo = '/assets/img/fotan/logo.png';
 
 const items = [
   {
-    src: 'https://worldschildrensprize.org/images/pakistan_top_M004555_-1.jpeg',
+    src:
+      'https://ukhealthcare.uky.edu/sites/default/files/styles/news_hero/public/2018-06/kids-leaning-out-schoolbus-windows.jpg?itok=D-hTuAE6',
     altText: 'Slide 1',
     caption: 'Slide 1',
   },
   {
     src:
-      'https://mcmscache.epapr.in/post_images/website_350/post_15844303/thumb.jpg',
-    altText: 'Slide 2',
-    caption: 'Slide 2',
-  },
-  {
-    src: 'http://www.charterhouse.edu.pk/page_images/6.jpg',
+      'http://www.edifyinternationalschoolkalaburagi.com/wp-content/uploads/2018/slides/Resource-Center.jpg',
     altText: 'Slide 3',
     caption: 'Slide 3',
   },
+  {
+    src:
+      'https://www.element-i.de/wp-content/uploads/2019/01/element-i_Schule_Header-900x300.jpg',
+    altText: 'Slide 2',
+    caption: 'Slide 2',
+  },
 ];
 
-const Home = () => {
+const Home = (props) => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [adminLogin, setAdminLogin] = useState(false);
-  const refRowHome = useRef(null);
-  const refSectionHome = useRef(null);
-  const refSectionFooter = useRef(null);
+  const [move, setMove] = useState(true);
+  // const refRowHome = useRef(null);
+  // const refSectionHome = useRef(null);
+  // const refSectionFooter = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
+  const { width } = props;
 
   const next = () => {
     if (animating) return;
@@ -83,6 +89,55 @@ const Home = () => {
     );
   });
 
+  const stopMove = () => {
+    setMove(false);
+  };
+  const startMove = () => {
+    setMove(true);
+  };
+
+  const getNavbarHeight = (screen) => {
+    let height;
+    switch (`${screen}`) {
+      case 'xl':
+        height = 100;
+        break;
+      case 'lg':
+        height = 90;
+        break;
+      case 'md':
+        height = 80;
+        break;
+      case 'sm':
+        height = 70;
+        break;
+      default:
+        height = 70;
+    }
+    return height;
+  };
+
+  const getLogoWidth = (screen) => {
+    let height;
+    switch (`${screen}`) {
+      case 'xl':
+        height = 150;
+        break;
+      case 'lg':
+        height = 150;
+        break;
+      case 'md':
+        height = 100;
+        break;
+      case 'sm':
+        height = 90;
+        break;
+      default:
+        height = 90;
+    }
+    return height;
+  };
+
   const openAdminLogin = () => {
     setAdminLogin(true);
   };
@@ -91,21 +146,21 @@ const Home = () => {
     setAdminLogin(false);
   };
 
-  const onWindowResize = (event) => {
-    const homeRect = refRowHome.current.getBoundingClientRect();
+  // const onWindowResize = (event) => {
+  //   const homeRect = refRowHome.current.getBoundingClientRect();
 
-    const homeSection = refSectionHome.current;
-    homeSection.style.backgroundPositionX = `${homeRect.x - 580}px`;
+  //   const homeSection = refSectionHome.current;
+  //   homeSection.style.backgroundPositionX = `${homeRect.x - 580}px`;
 
-    const footerSection = refSectionFooter.current;
-    footerSection.style.backgroundPositionX = `${
-      event.target.innerWidth - homeRect.x - 2000
-    }px`;
+  //   const footerSection = refSectionFooter.current;
+  //   footerSection.style.backgroundPositionX = `${
+  //     event.target.innerWidth - homeRect.x - 2000
+  //   }px`;
 
-    if (event.target.innerWidth >= 992) {
-      setShowMobileMenu(false);
-    }
-  };
+  //   if (event.target.innerWidth >= 992) {
+  //     setShowMobileMenu(false);
+  //   }
+  // };
 
   const onWindowClick = () => {
     setShowMobileMenu(false);
@@ -117,13 +172,13 @@ const Home = () => {
 
   useEffect(() => {
     window.addEventListener('scroll', onWindowScroll);
-    window.addEventListener('resize', onWindowResize);
+    // window.addEventListener('resize', onWindowResize);
     window.addEventListener('click', onWindowClick);
 
     document.body.classList.add('no-footer');
     return () => {
       window.removeEventListener('scroll', onWindowScroll);
-      window.removeEventListener('resize', onWindowResize);
+      // window.removeEventListener('resize', onWindowResize);
       window.removeEventListener('click', onWindowClick);
       document.body.classList.remove('no-footer');
     };
@@ -199,10 +254,13 @@ const Home = () => {
       </div>
 
       {/* Modals */}
-      <LoginModal open={adminLogin} closeHandler={closeAdminLogin} />
+      <div style={{ boxSizing: 'border-box' }}>
+        <LoginModal open={adminLogin} closeHandler={closeAdminLogin} />
+      </div>
 
       <div className="main-container">
-        <Headroom className="landing-page-nav">
+        {/* <Headroom className="landing-page-nav"> */}
+        <div className="landing-page-nav">
           <nav>
             <div className="container d-flex align-items-center justify-content-between">
               <a
@@ -213,7 +271,7 @@ const Home = () => {
                 <img
                   className="footer-logo"
                   alt="footer logo"
-                  width="150px"
+                  width={`${getLogoWidth(width)}px`}
                   src={logo}
                 />
                 {/* <span className="dark">FOTAN</span> */}
@@ -239,7 +297,7 @@ const Home = () => {
                 <li className="nav-item pl-4">
                   <button
                     type="button"
-                    className="btn btn-shadow btn-md pr-4 pl-4"
+                    className="btn btn-light btn-md pr-4 pl-4"
                     onClick={openAdminLogin}
                     // style={{ color: 'red' }}
                   >
@@ -259,38 +317,72 @@ const Home = () => {
               </span>
             </div>
           </nav>
-        </Headroom>
+        </div>
+        {/* </Headroom> */}
 
-        <div className="content-container" id="home">
-          <div className="section home" ref={refSectionHome}>
+        <div
+          className="content-container"
+          id="home"
+          style={{ marginTop: `${getNavbarHeight(width)}px` }}
+        >
+          {/* <div className="section home" ref={refSectionHome}>
             <div className="container">
               <div className="row home-row" ref={refRowHome}>
-                <div className="col-12">
-                  <Carousel
-                    activeIndex={activeIndex}
-                    next={next}
-                    previous={previous}
-                  >
-                    <CarouselIndicators
-                      items={items}
-                      activeIndex={activeIndex}
-                      onClickHandler={goToIndex}
-                    />
-                    {slides}
-                    <CarouselControl
-                      direction="prev"
-                      directionText="Previous"
-                      onClickHandler={previous}
-                    />
-                    <CarouselControl
-                      direction="next"
-                      directionText="Next"
-                      onClickHandler={next}
-                    />
-                  </Carousel>
-                </div>
+                <div className="col-12"></div>
               </div>
             </div>
+          </div> */}
+
+          <Carousel activeIndex={activeIndex} next={next} previous={previous}>
+            <CarouselIndicators
+              items={items}
+              activeIndex={activeIndex}
+              onClickHandler={goToIndex}
+            />
+            {slides}
+            <CarouselControl
+              direction="prev"
+              directionText="Previous"
+              onClickHandler={previous}
+            />
+            <CarouselControl
+              direction="next"
+              directionText="Next"
+              onClickHandler={next}
+            />
+          </Carousel>
+
+          <div className="row" style={{ marginTop: '1rem' }}>
+            <div className="col-12 offset-0 col-lg-8 offset-lg-2 text-center">
+              <h1>News & Updates</h1>
+            </div>
+          </div>
+          <div
+            style={{
+              width: '100%',
+              backgroundColor: '#a73f3f',
+            }}
+            onMouseEnter={stopMove}
+            onMouseLeave={startMove}
+          >
+            <Ticker move={move}>
+              {() => (
+                <div style={{ display: 'flex' }}>
+                  <h3
+                    style={{
+                      color: 'white',
+                      textAlign: 'center',
+                      alignSelf: 'center',
+                    }}
+                  >
+                    School activities have been continued in campus with strict
+                    SOPs for the safety of students and staff.{'  '} Teachers
+                    and managment is working hard to fill the education gap as
+                    annual exams are approaching.
+                  </h3>
+                </div>
+              )}
+            </Ticker>
           </div>
 
           <div className="section">
@@ -405,19 +497,9 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="section footer mb-0" ref={refSectionFooter}>
+          <div className="section footer mb-0">
             <div className="container">
               <div className="row footer-row">
-                <div className="col-12 text-right">
-                  <a
-                    className="btn btn-circle btn-outline-semi-light footer-circle-button c-pointer"
-                    href="#scroll"
-                    onClick={(event) => scrollTo(event, 'home')}
-                  >
-                    <i className="simple-icon-arrow-up" />
-                  </a>
-                </div>
-
                 <div className="col-12 text-center footer-content">
                   <a
                     className="c-pointer"
@@ -448,4 +530,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default withWidth()(Home);
