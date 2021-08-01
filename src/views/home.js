@@ -1,8 +1,8 @@
 /* eslint-disable react/no-array-index-key, react/no-danger */
 import classnames from 'classnames';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 // import Headroom from 'react-headroom';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { scroller } from 'react-scroll';
 import {
   Carousel,
@@ -10,11 +10,13 @@ import {
   CarouselControl,
   CarouselIndicators,
   CarouselItem,
+  Col,
+  Container,
+  Row,
 } from 'reactstrap';
 import { withWidth } from '@material-ui/core';
 import Ticker from 'react-ticker';
 // import GlideComponent from '../components/carousel/GlideComponent';
-import { buyUrl } from '../constants/defaultValues';
 import LoginModal from '../fotan/components/LoginModal';
 import MapBlock from '../fotan/components/MapBlock';
 import menuList from '../fotan/data/navMenuList';
@@ -49,9 +51,9 @@ const Home = (props) => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [adminLogin, setAdminLogin] = useState(false);
   const [move, setMove] = useState(true);
-  // const refRowHome = useRef(null);
+  const refRowHome = useRef(null);
   // const refSectionHome = useRef(null);
-  // const refSectionFooter = useRef(null);
+  const refSectionFooter = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
   const { width } = props;
@@ -146,21 +148,21 @@ const Home = (props) => {
     setAdminLogin(false);
   };
 
-  // const onWindowResize = (event) => {
-  //   const homeRect = refRowHome.current.getBoundingClientRect();
+  const onWindowResize = (event) => {
+    const homeRect = refRowHome.current.getBoundingClientRect();
 
-  //   const homeSection = refSectionHome.current;
-  //   homeSection.style.backgroundPositionX = `${homeRect.x - 580}px`;
+    // const homeSection = refSectionHome.current;
+    // homeSection.style.backgroundPositionX = `${homeRect.x - 580}px`;
 
-  //   const footerSection = refSectionFooter.current;
-  //   footerSection.style.backgroundPositionX = `${
-  //     event.target.innerWidth - homeRect.x - 2000
-  //   }px`;
+    const footerSection = refSectionFooter.current;
+    footerSection.style.backgroundPositionX = `${
+      event.target.innerWidth - homeRect.x - 2000
+    }px`;
 
-  //   if (event.target.innerWidth >= 992) {
-  //     setShowMobileMenu(false);
-  //   }
-  // };
+    if (event.target.innerWidth >= 992) {
+      setShowMobileMenu(false);
+    }
+  };
 
   const onWindowClick = () => {
     setShowMobileMenu(false);
@@ -172,13 +174,13 @@ const Home = (props) => {
 
   useEffect(() => {
     window.addEventListener('scroll', onWindowScroll);
-    // window.addEventListener('resize', onWindowResize);
+    window.addEventListener('resize', onWindowResize);
     window.addEventListener('click', onWindowClick);
 
     document.body.classList.add('no-footer');
     return () => {
       window.removeEventListener('scroll', onWindowScroll);
-      // window.removeEventListener('resize', onWindowResize);
+      window.removeEventListener('resize', onWindowResize);
       window.removeEventListener('click', onWindowClick);
       document.body.classList.remove('no-footer');
     };
@@ -232,14 +234,13 @@ const Home = (props) => {
             <div className="separator" />
           </li>
           <li className="nav-item text-center">
-            <a
+            <button
+              type="button"
               className="btn btn-outline-primary btn-sm mobile-menu-cta"
-              target="_blank"
-              rel="noopener noreferrer"
-              href={buyUrl}
+              onClick={openAdminLogin}
             >
               Login
-            </a>
+            </button>
           </li>
           <li className="nav-item text-center">
             <button
@@ -323,16 +324,9 @@ const Home = (props) => {
         <div
           className="content-container"
           id="home"
+          ref={refRowHome}
           style={{ marginTop: `${getNavbarHeight(width)}px` }}
         >
-          {/* <div className="section home" ref={refSectionHome}>
-            <div className="container">
-              <div className="row home-row" ref={refRowHome}>
-                <div className="col-12"></div>
-              </div>
-            </div>
-          </div> */}
-
           <Carousel activeIndex={activeIndex} next={next} previous={previous}>
             <CarouselIndicators
               items={items}
@@ -352,40 +346,42 @@ const Home = (props) => {
             />
           </Carousel>
 
-          <div className="row" style={{ marginTop: '1rem' }}>
-            <div className="col-12 offset-0 col-lg-8 offset-lg-2 text-center">
-              <h1>News & Updates</h1>
+          <div className="section mb-0">
+            <div className="row" style={{ marginTop: '1rem' }}>
+              <div className="col-12 offset-0 col-lg-8 offset-lg-2 text-center">
+                <h1>News & Updates</h1>
+              </div>
+            </div>
+            <div
+              style={{
+                width: '100%',
+                backgroundColor: '#a73f3f',
+              }}
+              onMouseEnter={stopMove}
+              onMouseLeave={startMove}
+            >
+              <Ticker move={move}>
+                {() => (
+                  <div style={{ display: 'flex' }}>
+                    <h3
+                      style={{
+                        color: 'white',
+                        textAlign: 'center',
+                        alignSelf: 'center',
+                      }}
+                    >
+                      School activities have been continued in campus with
+                      strict SOPs for the safety of students and staff.{'  '}{' '}
+                      Teachers and managment is working hard to fill the
+                      education gap as annual exams are approaching.
+                    </h3>
+                  </div>
+                )}
+              </Ticker>
             </div>
           </div>
-          <div
-            style={{
-              width: '100%',
-              backgroundColor: '#a73f3f',
-            }}
-            onMouseEnter={stopMove}
-            onMouseLeave={startMove}
-          >
-            <Ticker move={move}>
-              {() => (
-                <div style={{ display: 'flex' }}>
-                  <h3
-                    style={{
-                      color: 'white',
-                      textAlign: 'center',
-                      alignSelf: 'center',
-                    }}
-                  >
-                    School activities have been continued in campus with strict
-                    SOPs for the safety of students and staff.{'  '} Teachers
-                    and managment is working hard to fill the education gap as
-                    annual exams are approaching.
-                  </h3>
-                </div>
-              )}
-            </Ticker>
-          </div>
 
-          <div className="section">
+          <div className="section mb-0">
             <div className="container" id="features">
               <div className="row">
                 <div className="col-12 offset-0 col-lg-8 offset-lg-2 text-center">
@@ -421,7 +417,7 @@ const Home = (props) => {
             </div>
           </div>
 
-          <div className="section background">
+          <div className="section background mb-5">
             <div className="container" id="layouts">
               <div className="row">
                 <div className="col-12 offset-0 col-lg-8 offset-lg-2 text-center">
@@ -457,7 +453,7 @@ const Home = (props) => {
 
           <div className="section mb-0">
             <div className="container" id="components">
-              <div className="row mb-5">
+              <div className="row mb-0">
                 <div className="col-12 offset-0 col-lg-8 offset-lg-2 text-center">
                   <h1>Visit Campus</h1>
                   <p>You can check our branch locations from here</p>
@@ -472,32 +468,146 @@ const Home = (props) => {
             /> */}
           </div>
 
-          <div className="section background background-no-bottom mb-0 pb-0">
+          <div className="section background background-no-bottom mb-0 pb-5">
             <div className="container">
               <div className="row">
                 <div className="col-12 offset-0 col-lg-8 offset-lg-2 text-center">
-                  {/* <h1>Enjoying so Far?</h1>
-                  <p>
-                    Purchase Gogo to get a fresh start with your new project.
-                  </p> */}
+                  <h1>Contact Us</h1>
                 </div>
                 <div className="col-12 offset-0 col-lg-6 offset-lg-3 newsletter-input-container">
-                  {/* <div className="text-center mb-3">
-                    <a
-                      className="btn btn-secondary btn-xl"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      href={buyUrl}
-                    >
-                      BUY NOW
-                    </a>
-                  </div> */}
+                  <div className="text-center">
+                    <Container>
+                      <Row>
+                        <Col>
+                          <h4>Kalaskay Branch: 0345-6256261</h4>
+                        </Col>
+                        <Col>
+                          <h4>Fotan College: 0324-6256261</h4>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col>
+                          <h4>Dogranwala Branch: 0315-6256261</h4>
+                        </Col>
+                        <Col>
+                          <h4>Verpal Branch: 0311-6256261</h4>
+                        </Col>
+                      </Row>
+                    </Container>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col-12 offset-0 col-lg-6 offset-lg-3 newsletter-input-container">
+                  <div className="text-center">
+                    <Container>
+                      <Row>
+                        <div className="social-icons" style={{ width: '100%' }}>
+                          <ul className="list-unstyled list-inline">
+                            <li className="list-inline-item">
+                              <NavLink to="#" location={{}}>
+                                <i
+                                  className="simple-icon-social-facebook"
+                                  style={{
+                                    fontSize: `${
+                                      width === 'lg' ? '50px' : '35px'
+                                    }`,
+                                  }}
+                                />
+                              </NavLink>
+                            </li>
+                            <li className="list-inline-item">
+                              <NavLink to="#" location={{}}>
+                                <i
+                                  className="simple-icon-social-twitter"
+                                  style={{
+                                    fontSize: `${
+                                      width === 'lg' ? '50px' : '35px'
+                                    }`,
+                                  }}
+                                />
+                              </NavLink>
+                            </li>
+                            <li className="list-inline-item">
+                              <NavLink to="#" location={{}}>
+                                <i
+                                  className="simple-icon-social-google"
+                                  style={{
+                                    fontSize: `${
+                                      width === 'lg' ? '50px' : '35px'
+                                    }`,
+                                  }}
+                                />
+                              </NavLink>
+                            </li>
+                          </ul>
+                        </div>
+                      </Row>
+                    </Container>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="section footer mb-0">
+          <Container
+            style={{
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <div className="text-center">
+              <Container>
+                <Row>
+                  <Col xs="6" lg="4">
+                    <NavLink
+                      style={{ textDecorationLine: 'underline', margin: '5px' }}
+                      to="#"
+                    >
+                      About Fotan
+                    </NavLink>
+                  </Col>
+                  <Col xs="6" lg="4">
+                    <NavLink
+                      style={{ textDecorationLine: 'underline', margin: '5px' }}
+                      to="#"
+                    >
+                      Alumni
+                    </NavLink>
+                  </Col>
+                  <Col xs="6" lg="4">
+                    <NavLink
+                      style={{ textDecorationLine: 'underline', margin: '5px' }}
+                      to="#"
+                    >
+                      Admissions
+                    </NavLink>
+                  </Col>
+                  <Col xs="6" lg="4">
+                    <NavLink
+                      style={{ textDecorationLine: 'underline', margin: '5px' }}
+                      to="#"
+                    >
+                      Careers
+                    </NavLink>
+                  </Col>
+                  <Col xs="6" lg="4">
+                    <NavLink
+                      style={{ textDecorationLine: 'underline', margin: '5px' }}
+                      to="#"
+                    >
+                      Our Schools
+                    </NavLink>
+                  </Col>
+                </Row>
+              </Container>
+            </div>
+          </Container>
+
+          <div className="section footer mb-0" ref={refSectionFooter}>
             <div className="container">
               <div className="row footer-row">
                 <div className="col-12 text-center footer-content">
