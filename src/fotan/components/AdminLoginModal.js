@@ -2,7 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Typography } from '@material-ui/core';
 import React, { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { NavLink, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import {
   Button,
   Form,
@@ -53,7 +53,7 @@ const LoginModal = ({ open, closeHandler }) => {
   return (
     <>
       <Modal isOpen={open} onClosed={closeHandler}>
-        <ModalHeader>Login</ModalHeader>
+        <ModalHeader>Login As Admin</ModalHeader>
         <ModalBody>
           <Form
             className="av-tooltip tooltip-label-bottom"
@@ -104,10 +104,6 @@ const LoginModal = ({ open, closeHandler }) => {
                   <IntlMessages id="user.login-button" />
                 </span>
               </Button>
-              <NavLink to="/user/forgot-password">
-                <IntlMessages id="user.forgot-password-question" />
-              </NavLink>
-              <NavLink to="/user/register">Create an account</NavLink>
             </div>
           </Form>
           <Typography innerRef={messageRef} color="error">

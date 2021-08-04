@@ -2,7 +2,6 @@
 import { withWidth } from '@material-ui/core';
 import classnames from 'classnames';
 import React, { useEffect, useRef, useState } from 'react';
-// import Headroom from 'react-headroom';
 import { Link, NavLink } from 'react-router-dom';
 import { scroller } from 'react-scroll';
 import Ticker from 'react-ticker';
@@ -21,8 +20,8 @@ import {
 } from 'reactstrap';
 import GlideComponent from '../components/carousel/GlideComponent';
 import { Colxx } from '../components/common/CustomBootstrap';
-// import GlideComponent from '../components/carousel/GlideComponent';
 import LoginModal from '../fotan/components/LoginModal';
+import AdminLoginModal from '../fotan/components/AdminLoginModal';
 import MapBlock from '../fotan/components/MapBlock';
 import cardList from '../fotan/data/cardItems';
 import footerMenuList from '../fotan/data/footerMenuList';
@@ -87,6 +86,7 @@ const NoControlCarouselItem = ({ title, img, detail }) => {
 const Home = (props) => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [adminLogin, setAdminLogin] = useState(false);
+  const [login, setLogin] = useState(false);
   const [move, setMove] = useState(true);
   const refRowHome = useRef(null);
   // const refSectionHome = useRef(null);
@@ -185,6 +185,14 @@ const Home = (props) => {
     setAdminLogin(false);
   };
 
+  const openLogin = () => {
+    setLogin(true);
+  };
+
+  const closeLogin = () => {
+    setLogin(false);
+  };
+
   const onWindowResize = (event) => {
     const homeRect = refRowHome.current.getBoundingClientRect();
 
@@ -274,7 +282,7 @@ const Home = (props) => {
             <button
               type="button"
               className="btn btn-outline-primary btn-sm mobile-menu-cta"
-              onClick={openAdminLogin}
+              onClick={openLogin}
             >
               Login
             </button>
@@ -293,11 +301,13 @@ const Home = (props) => {
 
       {/* Modals */}
       <div style={{ boxSizing: 'border-box' }}>
-        <LoginModal open={adminLogin} closeHandler={closeAdminLogin} />
+        <AdminLoginModal open={adminLogin} closeHandler={closeAdminLogin} />
+      </div>
+      <div style={{ boxSizing: 'border-box' }}>
+        <LoginModal open={login} closeHandler={closeLogin} />
       </div>
 
       <div className="main-container">
-        {/* <Headroom className="landing-page-nav"> */}
         <div className="landing-page-nav">
           <nav>
             <div className="container d-flex align-items-center justify-content-between">
@@ -323,24 +333,14 @@ const Home = (props) => {
                   </li>
                 ))}
                 <li className="nav-item pl-4">
-                  <button
-                    type="button"
-                    className="btn btn-outline-semi-light btn-sm pr-4 pl-4"
-                    onClick={openAdminLogin}
-                    // style={{ color: 'red' }}
-                  >
+                  <Button outline onClick={openLogin}>
                     Login
-                  </button>
+                  </Button>
                 </li>
                 <li className="nav-item pl-4">
-                  <button
-                    type="button"
-                    className="btn btn-light btn-md pr-4 pl-4"
-                    onClick={openAdminLogin}
-                    // style={{ color: 'red' }}
-                  >
+                  <Button className="btn btn-shadow" onClick={openAdminLogin}>
                     Admin
-                  </button>
+                  </Button>
                 </li>
               </ul>
               {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
@@ -356,7 +356,6 @@ const Home = (props) => {
             </div>
           </nav>
         </div>
-        {/* </Headroom> */}
 
         <div
           className="content-container"
@@ -463,7 +462,7 @@ const Home = (props) => {
             </div>
           </div>
 
-          <div className="section background mb-5">
+          <div className="section background pb-1">
             <div className="container" id="layouts">
               <div className="row">
                 <div className="col-12 offset-0 col-lg-8 offset-lg-2 text-center">
@@ -484,7 +483,6 @@ const Home = (props) => {
                         600: { perView: 1 },
                         1400: { perView: 2 },
                       },
-                      hideNav: true,
                     }}
                   >
                     {cardList.map((item) => {
@@ -497,6 +495,29 @@ const Home = (props) => {
                   </GlideComponent>
                 </Colxx>
               </Row>
+            </div>
+          </div>
+
+          <div className="section mb-0">
+            <div className="container">
+              <div className="row">
+                <div className="col-12 offset-0 col-lg-8 offset-lg-2 text-center">
+                  <h1>ہمارا مقصد</h1>
+                  <h3>
+                    فوٹان سینڑل سکول کا مقصد بچوں کی مثبت و متوازن اسلامی اقدار
+                    کے مطابق تعلیم و تربیت کرنا ہے۔ تا کہ ہمارے بچے صحیح معنوں
+                    میں اقبال کے شاہین اور مرد مومن بن کر معاشرے کے لیے روشنی
+                    ثابت ہوں۔ ہر جگہ جن کے چمکنے سے اجالا ہو جائے۔ اس مقصد کو
+                    پورا کرنے کیلئے اسلامی اور دینی طرز پر نصاب متعین کیا گیا
+                    ہے۔ دور حاضر کی جدت میں ڈھالنے کے لیے کمپیوٹر کا نصاب ہر بچے
+                    کے لئے متعین کیا گیا ہے۔ اساتذہ کو خاص طریقے سے تربیت دی گئی
+                    ہے تاکہ وہ ہر بچے کو سمجھ سکیں۔ بچوں کو وقتاً فوقتاً
+                    اخلاقیات پر لیکچر دیا جاتا ہے تاکہ بچوں میں مثبت قدروں کی
+                    شجر کاری ہوتی رہے اور وہ آنے والے وقت میں ایک درخت بن کر اسے
+                    صراطِ مستقیم پر رہنے میں معاون ثابت ہو۔
+                  </h3>
+                </div>
+              </div>
             </div>
           </div>
 
