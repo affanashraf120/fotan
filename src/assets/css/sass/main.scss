@@ -11,3 +11,33 @@ html {
     background-color: $theme-color-1 !important;
 }
 */
+$logo-shadow-color: rgba(250, 255, 0, 0.5);
+
+.logo-img-container {
+  background-color: $logo-shadow-color;
+  box-shadow: 0px 0px 15px 15px $logo-shadow-color;
+  -webkit-box-shadow: 0px 0px 15px 15px $logo-shadow-color;
+  -moz-box-shadow: 0px 0px 15px 15px $logo-shadow-color;
+
+  > img {
+    width: 200px;
+  }
+
+  @media (max-width: 1280px) {
+    > img {
+      width: 150px;
+    }
+  }
+
+  @media (max-width: 960px) {
+    > img {
+      width: 100px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    > img {
+      width: 70px;
+    }
+  }
+}

@@ -18,6 +18,8 @@ import {
   Container,
   Row,
 } from 'reactstrap';
+import { FaQuoteLeft, FaQuoteRight } from 'react-icons/fa';
+
 import GlideComponent from '../components/carousel/GlideComponent';
 import { Colxx } from '../components/common/CustomBootstrap';
 import LoginModal from '../fotan/components/LoginModal';
@@ -156,27 +158,6 @@ const Home = (props) => {
     return height;
   };
 
-  const getLogoWidth = (screen) => {
-    let height;
-    switch (`${screen}`) {
-      case 'xl':
-        height = 150;
-        break;
-      case 'lg':
-        height = 150;
-        break;
-      case 'md':
-        height = 100;
-        break;
-      case 'sm':
-        height = 90;
-        break;
-      default:
-        height = 90;
-    }
-    return height;
-  };
-
   const openAdminLogin = () => {
     setAdminLogin(true);
   };
@@ -290,7 +271,7 @@ const Home = (props) => {
           <li className="nav-item text-center">
             <button
               type="button"
-              className="btn btn-shadow btn-md"
+              className="btn btn-outline-primary btn-sm mobile-menu-cta"
               onClick={openAdminLogin}
             >
               Admin
@@ -307,6 +288,7 @@ const Home = (props) => {
         <LoginModal open={login} closeHandler={closeLogin} />
       </div>
 
+      {/* Navbar */}
       <div className="main-container">
         <div className="landing-page-nav">
           <nav>
@@ -316,13 +298,9 @@ const Home = (props) => {
                 href="/"
                 onClick={(event) => scrollTo(event, 'home')}
               >
-                <img
-                  className="footer-logo"
-                  alt="footer logo"
-                  width={`${getLogoWidth(width)}px`}
-                  src={logo}
-                />
-                {/* <span className="dark">FOTAN</span> */}
+                <div className="logo-img-container">
+                  <img alt="logo" src={logo} />
+                </div>
               </a>
               <ul className="navbar-nav d-none d-lg-flex flex-row">
                 {menuList.map((item, index) => (
@@ -333,7 +311,7 @@ const Home = (props) => {
                   </li>
                 ))}
                 <li className="nav-item pl-4">
-                  <Button outline onClick={openLogin}>
+                  <Button className="btn btn-shadow" onClick={openLogin}>
                     Login
                   </Button>
                 </li>
@@ -357,6 +335,7 @@ const Home = (props) => {
           </nav>
         </div>
 
+        {/* Image slider */}
         <div
           className="content-container"
           id="home"
@@ -408,6 +387,8 @@ const Home = (props) => {
                       color: 'white',
                       textAlign: 'center',
                       alignSelf: 'center',
+                      // flexWrap: 'nowrap',
+                      whiteSpace: 'nowrap',
                     }}
                   >
                     School activities have been continued in campus with strict
@@ -424,7 +405,7 @@ const Home = (props) => {
             <div className="container" id="features">
               <div className="row">
                 <div className="col-12 offset-0 col-lg-8 offset-lg-2 text-center">
-                  <h1>Message of Worthy Chairman</h1>
+                  <h1 style={{ margin: '0' }}>Message of Worthy Chairman</h1>
                   <h3>Founder & Principal of Fotan Central Schools</h3>
                 </div>
               </div>
@@ -434,18 +415,36 @@ const Home = (props) => {
               <div className="row feature-row">
                 <Container>
                   <Row>
-                    <Col xs="12" sm="8">
-                      <div className="feature-text-container">
-                        <h1>Waqas Ashraf</h1>
-                        <div
-                          style={{ fontSize: '1.5rem' }}
-                          dangerouslySetInnerHTML={{
-                            __html: ` بچوں کو بس اللہ کا تعارف کروا دیجیے، دنیا کی مادی دوڑ سے
-                        بچا کر حقیقی خوشی سے روشناس کروانے کی کوششوں میں لگے رہیے۔
-                        <br />`,
-                          }}
-                        />
-                      </div>
+                    <Col
+                      xs="12"
+                      sm="8"
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <h1
+                        style={{
+                          fontFamily: 'monospace',
+                          fontWeight: 'bolder',
+                        }}
+                      >
+                        Waqas Ashraf
+                      </h1>
+                      <h5
+                        style={{
+                          textAlign: 'right',
+                          fontSize: `${getNavbarHeight() / 2}px`,
+                        }}
+                      >
+                        <FaQuoteLeft style={{ fontSize: '100px' }} />
+                        بچوں کو بس اللہ کا تعارف کروا دیجیے، دنیا کی مادی دوڑ سے
+                        بچا کر حقیقی خوشی سے روشناس کروانے کی کوششوں میں لگے
+                        رہیے۔
+                        <FaQuoteRight style={{ fontSize: '100px' }} />
+                      </h5>
                     </Col>
                     <Col xs="12" sm="4">
                       <img
@@ -632,11 +631,12 @@ const Home = (props) => {
               <Container>
                 <Row>
                   {footerMenuList.map((item, index) => (
-                    <Col key={index} xs="6" lg="4">
+                    <Col key={index} xs="6" lg="12">
                       <NavLink
                         style={{
                           textDecorationLine: 'underline',
                           margin: '5px',
+                          color: 'royalblue',
                         }}
                         to={item.url}
                       >
