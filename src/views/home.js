@@ -1,13 +1,14 @@
 /* eslint-disable react/no-array-index-key, react/no-danger */
-import { Typography, withWidth } from '@material-ui/core';
+import { withWidth } from '@material-ui/core';
 import classnames from 'classnames';
 import React, { useEffect, useRef, useState } from 'react';
 import {
   FaArrowRight,
+  FaPhone,
   FaQuoteLeft,
   FaQuoteRight,
-  FaPhone,
 } from 'react-icons/fa';
+import { IoMdMailUnread } from 'react-icons/io';
 import { Link, NavLink } from 'react-router-dom';
 import { scroller } from 'react-scroll';
 import Ticker from 'react-ticker';
@@ -91,23 +92,36 @@ const NoControlCarouselItem = ({ title, img, detail }) => {
   );
 };
 
-const BranchCard = ({ title, img, detail }) => {
+const BranchCard = ({ title, img, detail, email }) => {
   return (
     <div className="glide-item">
       <Card>
         <div className="position-relative">
           <img className="card-img-top" src={img} alt={title} />
         </div>
-        <CardBody style={{ textAlign: 'center' }}>
-          <h3>{title}</h3>
+        <CardBody style={{ textAlign: 'center', height: '250px' }}>
+          {title.includes('Dehla') ? (
+            <>
+              <h3>{title.split('\n')[0]}</h3>
+              <h3>{title.split('\n')[1]}</h3>
+            </>
+          ) : (
+            <h3>{title}</h3>
+          )}
+          <p
+            className=" text-small mb-0 font-weight-light"
+            style={{ height: '30px' }}
+          >
+            <FaPhone /> {detail.slice(0, 3)}-{detail.slice(3)}
+          </p>
           <p
             className=" text-small mb-0 font-weight-light"
             style={{ height: '50px' }}
           >
-            <FaPhone /> {detail.slice(0, 3)}-{detail.slice(3)}
+            <IoMdMailUnread /> {email}
           </p>
           <Button>
-            {title}
+            Visit Site
             <FaArrowRight style={{ marginLeft: '5px' }} />
           </Button>
         </CardBody>
@@ -509,12 +523,16 @@ const Home = (props) => {
                           alignSelf: 'flex-start',
                         }}
                       >
-                        <Typography variant="h2" style={{ margin: '0' }}>
+                        <h2
+                          style={{
+                            margin: '0',
+                            fontWeight: 'bolder',
+                            fontSize: '1.8rem',
+                          }}
+                        >
                           - Waqas Ashraf
-                        </Typography>
-                        <Typography variant="h3">
-                          Founder & Chairman of Fotan Central Schools
-                        </Typography>
+                        </h2>
+                        <h3>Founder & Chairman of Fotan Central Schools</h3>
                       </div>
                     </Col>
                   </Row>

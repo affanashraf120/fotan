@@ -19,31 +19,35 @@ const passwords = {
 };
 
 const branches = {
-  verpal: 'Warpal',
-  kalaske: 'Kalasky',
-  dogranwala: 'Dogranwala',
-  dehla: 'Dehla',
+  verpal: 'Verpal Branch',
+  kalaske: 'Kalaske Branch',
+  dogranwala: 'Dogranwala Branch',
+  dehla: 'Kids Campus\n Dehla Chatha',
 };
 
 const branchCards = [
   {
     title: branches.verpal,
     detail: `${phoneNumbers.verpal}`,
+    email: emails.verpal,
     img: '/assets/img/fotan/campuses/verpal.JPG',
   },
   {
     title: branches.kalaske,
     detail: `${phoneNumbers.kalaske}`,
+    email: emails.kalaske,
     img: '/assets/img/fotan/campuses/verpal.JPG',
   },
   {
     title: branches.dogranwala,
     detail: `${phoneNumbers.dogranwala}`,
+    email: emails.dogranwala,
     img: '/assets/img/fotan/campuses/verpal.JPG',
   },
   {
     title: branches.dehla,
     detail: `${phoneNumbers.dehla}`,
+    email: emails.dehla,
     img: '/assets/img/fotan/campuses/verpal.JPG',
   },
 ];
