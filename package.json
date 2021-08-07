@@ -52,6 +52,7 @@
     "react-ticker": "^1.2.2",
     "react-transition-group": "^4.4.1",
     "react-yandex-maps": "^4.6.0",
+    "reactjs-popup": "^2.0.5",
     "reactstrap": "^8.8.1",
     "redux": "^4.0.5",
     "redux-saga": "^1.1.3",

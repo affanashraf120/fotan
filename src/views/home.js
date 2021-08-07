@@ -2,6 +2,7 @@
 import { Typography, withWidth } from '@material-ui/core';
 import classnames from 'classnames';
 import React, { useEffect, useRef, useState } from 'react';
+import { FaQuoteLeft, FaQuoteRight } from 'react-icons/fa';
 import { Link, NavLink } from 'react-router-dom';
 import { scroller } from 'react-scroll';
 import Ticker from 'react-ticker';
@@ -18,12 +19,11 @@ import {
   Container,
   Row,
 } from 'reactstrap';
-import { FaQuoteLeft, FaQuoteRight } from 'react-icons/fa';
-
 import GlideComponent from '../components/carousel/GlideComponent';
 import { Colxx } from '../components/common/CustomBootstrap';
-import LoginModal from '../fotan/components/LoginModal';
 import AdminLoginModal from '../fotan/components/AdminLoginModal';
+import AnouncementPopup from '../fotan/components/AnouncementPopup';
+import LoginModal from '../fotan/components/LoginModal';
 import MapBlock from '../fotan/components/MapBlock';
 import cardList from '../fotan/data/cardItems';
 import footerMenuList from '../fotan/data/footerMenuList';
@@ -95,6 +95,7 @@ const Home = (props) => {
   const refSectionFooter = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
+
   const { width } = props;
 
   const next = () => {
@@ -301,6 +302,7 @@ const Home = (props) => {
       <div style={{ boxSizing: 'border-box' }}>
         <LoginModal open={login} closeHandler={closeLogin} />
       </div>
+      <AnouncementPopup />
 
       {/* Navbar */}
       <div className="main-container">
