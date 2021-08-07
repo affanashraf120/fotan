@@ -18,4 +18,34 @@ const passwords = {
   fotan: 'rizvi',
 };
 
-export { emails, passwords, phoneNumbers };
+const branches = {
+  verpal: 'Warpal',
+  kalaske: 'Kalasky',
+  dogranwala: 'Dogranwala',
+  dehla: 'Dehla',
+};
+
+const branchCards = [
+  {
+    title: branches.verpal,
+    detail: `${phoneNumbers.verpal}`,
+    img: '/assets/img/fotan/campuses/verpal.JPG',
+  },
+  {
+    title: branches.kalaske,
+    detail: `${phoneNumbers.kalaske}`,
+    img: '/assets/img/fotan/campuses/verpal.JPG',
+  },
+  {
+    title: branches.dogranwala,
+    detail: `${phoneNumbers.dogranwala}`,
+    img: '/assets/img/fotan/campuses/verpal.JPG',
+  },
+  {
+    title: branches.dehla,
+    detail: `${phoneNumbers.dehla}`,
+    img: '/assets/img/fotan/campuses/verpal.JPG',
+  },
+];
+
+export { emails, passwords, phoneNumbers, branchCards, branches };

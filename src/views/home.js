@@ -2,7 +2,12 @@
 import { Typography, withWidth } from '@material-ui/core';
 import classnames from 'classnames';
 import React, { useEffect, useRef, useState } from 'react';
-import { FaQuoteLeft, FaQuoteRight } from 'react-icons/fa';
+import {
+  FaArrowRight,
+  FaQuoteLeft,
+  FaQuoteRight,
+  FaPhone,
+} from 'react-icons/fa';
 import { Link, NavLink } from 'react-router-dom';
 import { scroller } from 'react-scroll';
 import Ticker from 'react-ticker';
@@ -25,6 +30,7 @@ import AdminLoginModal from '../fotan/components/AdminLoginModal';
 import AnouncementPopup from '../fotan/components/AnouncementPopup';
 import LoginModal from '../fotan/components/LoginModal';
 import MapBlock from '../fotan/components/MapBlock';
+import { branchCards } from '../fotan/data/branchHandles';
 import cardList from '../fotan/data/cardItems';
 import footerMenuList from '../fotan/data/footerMenuList';
 import menuList from '../fotan/data/navMenuList';
@@ -79,6 +85,31 @@ const NoControlCarouselItem = ({ title, img, detail }) => {
               Read More
             </Button>
           )}
+        </CardBody>
+      </Card>
+    </div>
+  );
+};
+
+const BranchCard = ({ title, img, detail }) => {
+  return (
+    <div className="glide-item">
+      <Card>
+        <div className="position-relative">
+          <img className="card-img-top" src={img} alt={title} />
+        </div>
+        <CardBody style={{ textAlign: 'center' }}>
+          <h3>{title}</h3>
+          <p
+            className=" text-small mb-0 font-weight-light"
+            style={{ height: '50px' }}
+          >
+            <FaPhone /> {detail.slice(0, 3)}-{detail.slice(3)}
+          </p>
+          <Button>
+            {title}
+            <FaArrowRight style={{ marginLeft: '5px' }} />
+          </Button>
         </CardBody>
       </Card>
     </div>
@@ -560,7 +591,7 @@ const Home = (props) => {
           </div>
 
           <div className="section mb-0">
-            <div className="container" id="components">
+            <div className="container">
               <div className="row mb-0">
                 <div className="col-12 offset-0 col-lg-8 offset-lg-2 text-center">
                   <h1>Visit Campus</h1>
@@ -569,11 +600,41 @@ const Home = (props) => {
                 </div>
               </div>
             </div>
-            {/* <img
-              className="components-image mb-5 pb-5"
-              alt="Components"
-              src="/assets/img/landing-page/components.jpg"
-            /> */}
+          </div>
+
+          <div className="section mb-0 ">
+            <div className="container">
+              <div className="row">
+                <div className="col-12 offset-0 col-lg-8 offset-lg-2 text-center">
+                  <h1>Branches</h1>
+                </div>
+                <div className="col-12">
+                  <div className="text-center">
+                    <GlideComponent
+                      settings={{
+                        gap: 5,
+                        perView: 4,
+                        type: 'carousel',
+                        breakpoints: {
+                          600: { perView: 1 },
+                          960: { perView: 2 },
+                          1024: { perView: 3 },
+                          1400: { perView: 4 },
+                        },
+                      }}
+                    >
+                      {branchCards.map((item) => {
+                        return (
+                          <div key={item.id}>
+                            <BranchCard {...item} />
+                          </div>
+                        );
+                      })}
+                    </GlideComponent>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div className="section background background-no-bottom mb-0 pb-5">
@@ -582,31 +643,6 @@ const Home = (props) => {
                 <div className="col-12 offset-0 col-lg-8 offset-lg-2 text-center">
                   <h1>Contact Us</h1>
                 </div>
-                <div className="col-12 offset-0 col-lg-6 offset-lg-3 newsletter-input-container">
-                  <div className="text-center">
-                    <Container>
-                      <Row>
-                        <Col>
-                          <h4>Kalaskay Branch: 0345-6256261</h4>
-                        </Col>
-                        <Col>
-                          <h4>Fotan College: 0324-6256261</h4>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col>
-                          <h4>Dogranwala Branch: 0315-6256261</h4>
-                        </Col>
-                        <Col>
-                          <h4>Verpal Branch: 0311-6256261</h4>
-                        </Col>
-                      </Row>
-                    </Container>
-                  </div>
-                </div>
-              </div>
-
-              <div className="row">
                 <div className="col-12 offset-0 col-lg-6 offset-lg-3 newsletter-input-container">
                   <div className="text-center">
                     <Container>
@@ -691,6 +727,17 @@ const Home = (props) => {
           <div className="section footer mb-0" ref={refSectionFooter}>
             <div className="container">
               <div className="row footer-row">
+                {/* <div
+                  style={{
+                    alignSelf: 'center',
+                    position: 'relative',
+                    left: '50%',
+                    top: '0',
+                    zIndex: 'auto',
+                  }}
+                >
+                  logo
+                </div> */}
                 <div className="col-12 text-center footer-content">
                   <a
                     className="c-pointer"
