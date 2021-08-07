@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key, react/no-danger */
-import { withWidth } from '@material-ui/core';
+import { Typography, withWidth } from '@material-ui/core';
 import classnames from 'classnames';
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
@@ -158,6 +158,27 @@ const Home = (props) => {
     return height;
   };
 
+  const getMessageFontSize = (screen) => {
+    let height;
+    switch (`${screen}`) {
+      case 'xl':
+        height = 35;
+        break;
+      case 'lg':
+        height = 30;
+        break;
+      case 'md':
+        height = 25;
+        break;
+      case 'sm':
+        height = 20;
+        break;
+      default:
+        height = 20;
+    }
+    return height;
+  };
+
   const openAdminLogin = () => {
     setAdminLogin(true);
   };
@@ -176,9 +197,6 @@ const Home = (props) => {
 
   const onWindowResize = (event) => {
     const homeRect = refRowHome.current.getBoundingClientRect();
-
-    // const homeSection = refSectionHome.current;
-    // homeSection.style.backgroundPositionX = `${homeRect.x - 580}px`;
 
     const footerSection = refSectionFooter.current;
     footerSection.style.backgroundPositionX = `${
@@ -222,10 +240,6 @@ const Home = (props) => {
     });
     return false;
   };
-
-  // const toggle = (tab) => {
-  //   if (activeTab !== tab) setActiveTab(tab);
-  // };
 
   return (
     <div
@@ -406,7 +420,6 @@ const Home = (props) => {
               <div className="row">
                 <div className="col-12 offset-0 col-lg-8 offset-lg-2 text-center">
                   <h1 style={{ margin: '0' }}>Message of Worthy Chairman</h1>
-                  <h3>Founder & Principal of Fotan Central Schools</h3>
                 </div>
               </div>
 
@@ -415,9 +428,22 @@ const Home = (props) => {
               <div className="row feature-row">
                 <Container>
                   <Row>
+                    <Col xs="12" sm={{ size: 3, order: 1 }}>
+                      <img
+                        alt="Chairperson"
+                        src={chairPerson}
+                        style={{
+                          borderRadius: '50%',
+                          marginTop: '16px',
+                          marginBottom: '16px',
+                          width: '100%',
+                        }}
+                        className="feature-image-right feature-image-charts position-relative"
+                      />
+                    </Col>
                     <Col
                       xs="12"
-                      sm="8"
+                      sm="9"
                       style={{
                         display: 'flex',
                         flexDirection: 'column',
@@ -425,35 +451,38 @@ const Home = (props) => {
                         alignItems: 'center',
                       }}
                     >
-                      <h1
-                        style={{
-                          fontFamily: 'monospace',
-                          fontWeight: 'bolder',
-                        }}
-                      >
-                        Waqas Ashraf
-                      </h1>
                       <h5
                         style={{
                           textAlign: 'right',
-                          fontSize: `${getNavbarHeight() / 2}px`,
+                          fontSize: `${getMessageFontSize(width)}px`,
                         }}
                       >
-                        <FaQuoteLeft style={{ fontSize: '100px' }} />
+                        <FaQuoteLeft
+                          style={{
+                            fontSize: `${getMessageFontSize(width) * 3}px`,
+                          }}
+                        />
                         بچوں کو بس اللہ کا تعارف کروا دیجیے، دنیا کی مادی دوڑ سے
                         بچا کر حقیقی خوشی سے روشناس کروانے کی کوششوں میں لگے
                         رہیے۔
-                        <FaQuoteRight style={{ fontSize: '100px' }} />
+                        <FaQuoteRight
+                          style={{
+                            fontSize: `${getMessageFontSize(width) * 3}px`,
+                          }}
+                        />
                       </h5>
-                    </Col>
-                    <Col xs="12" sm="4">
-                      <img
-                        alt="Chairperson"
-                        src={chairPerson}
-                        style={{ borderRadius: '50%', marginTop: '16px' }}
-                        width="100%"
-                        className="feature-image-right feature-image-charts position-relative"
-                      />
+                      <div
+                        style={{
+                          alignSelf: 'flex-start',
+                        }}
+                      >
+                        <Typography variant="h2" style={{ margin: '0' }}>
+                          - Waqas Ashraf
+                        </Typography>
+                        <Typography variant="h3">
+                          Founder & Chairman of Fotan Central Schools
+                        </Typography>
+                      </div>
                     </Col>
                   </Row>
                 </Container>
@@ -497,12 +526,20 @@ const Home = (props) => {
             </div>
           </div>
 
-          <div className="section mb-0">
+          <div
+            className="section mb-0 "
+            style={{
+              backgroundImage: 'url(assets/img/fotan/blur-bg.jpg)',
+              backgroundPosition: 'center',
+              backgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat',
+            }}
+          >
             <div className="container">
               <div className="row">
                 <div className="col-12 offset-0 col-lg-8 offset-lg-2 text-center">
-                  <h1>ہمارا مقصد</h1>
-                  <h3>
+                  <h1 style={{ color: 'white' }}>ہمارا مقصد</h1>
+                  <h3 style={{ color: 'white' }}>
                     فوٹان سینڑل سکول کا مقصد بچوں کی مثبت و متوازن اسلامی اقدار
                     کے مطابق تعلیم و تربیت کرنا ہے۔ تا کہ ہمارے بچے صحیح معنوں
                     میں اقبال کے شاہین اور مرد مومن بن کر معاشرے کے لیے روشنی

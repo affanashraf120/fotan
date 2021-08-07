@@ -11,13 +11,13 @@ html {
     background-color: $theme-color-1 !important;
 }
 */
-$logo-shadow-color: rgba(250, 255, 0, 0.5);
+$logo-shadow-color: rgba(255, 255, 0, 1);
 
 .logo-img-container {
   background-color: $logo-shadow-color;
-  box-shadow: 0px 0px 15px 15px $logo-shadow-color;
-  -webkit-box-shadow: 0px 0px 15px 15px $logo-shadow-color;
-  -moz-box-shadow: 0px 0px 15px 15px $logo-shadow-color;
+  box-shadow: 0px 0px 12px 12px $logo-shadow-color;
+  -webkit-box-shadow: 0px 0px 12px 12px $logo-shadow-color;
+  -moz-box-shadow: 0px 0px 12px 12px $logo-shadow-color;
 
   > img {
     width: 200px;

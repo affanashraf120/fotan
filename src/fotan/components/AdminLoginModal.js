@@ -16,11 +16,7 @@ import {
 } from 'reactstrap';
 import * as yup from 'yup';
 import IntlMessages from '../../helpers/IntlMessages';
-
-const admin = {
-  email: 'admin@fotan.pk',
-  password: 'admin',
-};
+import { emails, passwords } from '../data/branchHandles';
 
 const schema = yup.object().shape({
   email: yup.string().email('Valid Email Required').required('Email required'),
@@ -42,7 +38,17 @@ const LoginModal = ({ open, closeHandler }) => {
 
   const submitHandler = (data) => {
     setLoading(true);
-    if (data.email === admin.email && data.password === admin.password) {
+    const handle = {};
+
+    // Find email
+    Object.entries(emails).forEach(([key, value]) => {
+      if (data.email.toLocaleLowerCase() === value) {
+        handle.name = key;
+        handle.email = value;
+      }
+    });
+    //
+    if (data.email && data.password === passwords.fotan) {
       history.push('/app');
     } else {
       messageRef.current.innerText = 'Invalid email or password';
@@ -106,9 +112,11 @@ const LoginModal = ({ open, closeHandler }) => {
               </Button>
             </div>
           </Form>
-          <Typography innerRef={messageRef} color="error">
-            {/* {messageError} */}
-          </Typography>
+          <Typography
+            style={{ marginTop: '15px' }}
+            innerRef={messageRef}
+            color="error"
+          />
         </ModalBody>
         <ModalFooter>
           <Button color="secondary" onClick={closeHandler}>
