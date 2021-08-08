@@ -136,10 +136,14 @@ const Home = (props) => {
   const [login, setLogin] = useState(false);
   const [move, setMove] = useState(true);
   const refRowHome = useRef(null);
-  // const refSectionHome = useRef(null);
   const refSectionFooter = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
+  const [active, setActive] = useState(true);
+
+  const closeModal = () => {
+    setActive(false);
+  };
 
   const { width } = props;
 
@@ -347,7 +351,7 @@ const Home = (props) => {
       <div style={{ boxSizing: 'border-box' }}>
         <LoginModal open={login} closeHandler={closeLogin} />
       </div>
-      <AnouncementPopup />
+      {active && <AnouncementPopup handleClose={closeModal} />}
 
       {/* Navbar */}
       <div className="main-container">
