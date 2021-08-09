@@ -10,8 +10,8 @@ const menuList = [
     url: '/',
   },
   {
-    id: 'our-mission',
-    name: 'Our Mission',
+    id: 'jobs',
+    name: 'Jobs',
     url: '/',
   },
   {
@@ -27,6 +27,10 @@ const menuList = [
       { id: 'matric', name: 'Matriculation', url: '/' },
       { id: 'intermediate', name: 'Intermediate', url: '/' },
     ],
+  },
+  {
+    id: 'photo-gallery',
+    name: 'Photo Gallery',
   },
   {
     id: 'contact',

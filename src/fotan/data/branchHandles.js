@@ -1,7 +1,7 @@
 const emails = {
   chairman: 'chairman@fotanistan.com',
   dogranwala: 'fdkhead@fotanistan.com',
-  kalaske: 'fmchead@@fotanistan.com',
+  kalaske: 'fmchead@fotanistan.com',
   verpal: 'fverpalhead@fotanistan.com',
   dehla: 'fdehlahead@fotanistan.com',
 };

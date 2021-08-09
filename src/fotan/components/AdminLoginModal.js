@@ -38,17 +38,17 @@ const LoginModal = ({ open, closeHandler }) => {
 
   const submitHandler = (data) => {
     setLoading(true);
-    const handle = {};
+    // const handle = {};
 
     // Find email
-    Object.entries(emails).forEach(([key, value]) => {
-      if (data.email.toLocaleLowerCase() === value) {
-        handle.name = key;
-        handle.email = value;
-      }
-    });
+    // Object.entries(emails).forEach(([key, value]) => {
+    //   if (data.email.toLocaleLowerCase() === value) {
+    //     handle.name = key;
+    //     handle.email = value;
+    //   }
+    // });
     //
-    if (data.email && data.password === passwords.fotan) {
+    if (data.email === emails.chairman && data.password === passwords.fotan) {
       history.push('/app');
     } else {
       messageRef.current.innerText = 'Invalid email or password';

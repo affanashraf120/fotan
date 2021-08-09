@@ -43,22 +43,19 @@ const logo = '/assets/img/fotan/logo.png';
 
 const items = [
   {
-    src:
-      'https://ukhealthcare.uky.edu/sites/default/files/styles/news_hero/public/2018-06/kids-leaning-out-schoolbus-windows.jpg?itok=D-hTuAE6',
-    altText: 'Slide 1',
-    caption: 'Slide 1',
+    src: 'assets/img/fotan/slides/slide-1.jpg',
+    altText: '',
+    caption: '',
   },
   {
-    src:
-      'http://www.edifyinternationalschoolkalaburagi.com/wp-content/uploads/2018/slides/Resource-Center.jpg',
-    altText: 'Slide 3',
-    caption: 'Slide 3',
+    src: 'assets/img/fotan/slides/slide-2.jpg',
+    altText: '',
+    caption: '',
   },
   {
-    src:
-      'https://www.element-i.de/wp-content/uploads/2019/01/element-i_Schule_Header-900x300.jpg',
-    altText: 'Slide 2',
-    caption: 'Slide 2',
+    src: 'assets/img/fotan/slides/slide-3.jpg',
+    altText: '',
+    caption: '',
   },
 ];
 
@@ -72,6 +69,7 @@ const NoControlCarouselItem = ({ title, img, detail }) => {
         <CardBody style={{ textAlign: 'center' }}>
           <h3>{title}</h3>
           <p
+            dir="rtl"
             className=" text-small mb-0 font-weight-light"
             style={{ height: '200px' }}
           >
@@ -223,8 +221,11 @@ const Home = (props) => {
       case 'sm':
         height = 20;
         break;
+      case 'xs':
+        height = 15;
+        break;
       default:
-        height = 20;
+        height = 15;
     }
     return height;
   };
@@ -313,13 +314,25 @@ const Home = (props) => {
           />
         </a>
         <ul className="navbar-nav">
-          {menuList.map((item, index) => (
-            <li key={index} className="nav-item">
-              <Link className="c-pointer" to={item.url}>
-                {item.name}
-              </Link>
-            </li>
-          ))}
+          {menuList.map((item, index) => {
+            return item.id !== 'campuses' ? (
+              <li key={index} className="nav-item">
+                <Link className="c-pointer" to={item.url}>
+                  {item.name}
+                </Link>
+              </li>
+            ) : (
+              <li key={index} className="nav-item">
+                <a
+                  className="c-pointer"
+                  href="#scroll"
+                  onClick={(event) => scrollTo(event, 'campuses')}
+                >
+                  {item.name}
+                </a>
+              </li>
+            );
+          })}
           <li className="nav-item">
             <div className="separator" />
           </li>
@@ -368,13 +381,27 @@ const Home = (props) => {
                 </div>
               </a>
               <ul className="navbar-nav d-none d-lg-flex flex-row">
-                {menuList.map((item, index) => (
-                  <li key={index} className="nav-item">
-                    <Link className="c-pointer" to={item.url}>
-                      {item.name}
-                    </Link>
-                  </li>
-                ))}
+                {menuList.map((item, index) => {
+                  // href="#scroll"
+                  // onClick={(event) => scrollTo(event, 'home')}
+                  return item.id !== 'campuses' ? (
+                    <li key={index} className="nav-item">
+                      <Link className="c-pointer" to={item.url}>
+                        {item.name}
+                      </Link>
+                    </li>
+                  ) : (
+                    <li key={index} className="nav-item">
+                      <a
+                        className="c-pointer"
+                        href="#scroll"
+                        onClick={(event) => scrollTo(event, 'campuses')}
+                      >
+                        {item.name}
+                      </a>
+                    </li>
+                  );
+                })}
                 <li className="nav-item pl-4">
                   <Button className="btn btn-shadow" onClick={openLogin}>
                     Login
@@ -536,7 +563,13 @@ const Home = (props) => {
                         >
                           - Waqas Ashraf
                         </h2>
-                        <h3>Founder & Chairman of Fotan Central Schools</h3>
+                        <h3
+                          style={{
+                            fontSize: '1rem',
+                          }}
+                        >
+                          Founder & Chairman of Fotan Central Schools
+                        </h3>
                       </div>
                     </Col>
                   </Row>
@@ -624,11 +657,11 @@ const Home = (props) => {
             </div>
           </div>
 
-          <div className="section mb-0 ">
+          <div className="section mb-0" id="campuses">
             <div className="container">
               <div className="row">
                 <div className="col-12 offset-0 col-lg-8 offset-lg-2 text-center">
-                  <h1>Branches</h1>
+                  <h1>Campuses</h1>
                 </div>
                 <div className="col-12">
                   <div className="text-center">
@@ -749,17 +782,6 @@ const Home = (props) => {
           <div className="section footer mb-0" ref={refSectionFooter}>
             <div className="container">
               <div className="row footer-row">
-                {/* <div
-                  style={{
-                    alignSelf: 'center',
-                    position: 'relative',
-                    left: '50%',
-                    top: '0',
-                    zIndex: 'auto',
-                  }}
-                >
-                  logo
-                </div> */}
                 <div className="col-12 text-center footer-content">
                   <a
                     className="c-pointer"
