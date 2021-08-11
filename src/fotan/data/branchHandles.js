@@ -30,25 +30,25 @@ const branchCards = [
     title: branches.verpal,
     detail: `${phoneNumbers.verpal}`,
     email: emails.verpal,
-    img: '/assets/img/fotan/campuses/verpal.JPG',
+    img: '/assets/img/fotan/campuses/verpal.jpg',
   },
   {
     title: branches.kalaske,
     detail: `${phoneNumbers.kalaske}`,
     email: emails.kalaske,
-    img: '/assets/img/fotan/campuses/verpal.JPG',
+    img: '/assets/img/fotan/campuses/kalaske.jpg',
   },
   {
     title: branches.dogranwala,
     detail: `${phoneNumbers.dogranwala}`,
     email: emails.dogranwala,
-    img: '/assets/img/fotan/campuses/verpal.JPG',
+    img: '/assets/img/fotan/campuses/dogranwala.jpg',
   },
   {
     title: branches.dehla,
     detail: `${phoneNumbers.dehla}`,
     email: emails.dehla,
-    img: '/assets/img/fotan/campuses/verpal.JPG',
+    img: '/assets/img/fotan/campuses/dehla.jpg',
   },
 ];
 

@@ -95,7 +95,7 @@ const BranchCard = ({ title, img, detail, email }) => {
     <div className="glide-item">
       <Card>
         <div className="position-relative">
-          <img className="card-img-top" src={img} alt={title} />
+          <img height="200px" className="card-img-top" src={img} alt={title} />
         </div>
         <CardBody style={{ textAlign: 'center', height: '250px' }}>
           {title.includes('Dehla') ? (
@@ -473,22 +473,22 @@ const Home = (props) => {
           >
             <Ticker move={move}>
               {() => (
-                <div style={{ display: 'flex' }}>
-                  <h3
-                    style={{
-                      color: 'white',
-                      textAlign: 'center',
-                      alignSelf: 'center',
-                      // flexWrap: 'nowrap',
-                      whiteSpace: 'nowrap',
-                    }}
-                  >
-                    School activities have been continued in campus with strict
-                    SOPs for the safety of students and staff.{'  '} Teachers
-                    and managment is working hard to fill the education gap as
-                    annual exams are approaching.
-                  </h3>
-                </div>
+                <h3
+                  style={{
+                    color: 'white',
+                    textAlign: 'center',
+                    alignSelf: 'center',
+                    margin: 'auto',
+                    padding: '5px',
+                    // flexWrap: 'nowrap',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  School activities have been continued in campus with strict
+                  SOPs for the safety of students and staff.{'  '} Teachers and
+                  managment is working hard to fill the education gap as annual
+                  exams are approaching.
+                </h3>
               )}
             </Ticker>
           </div>
@@ -629,16 +629,16 @@ const Home = (props) => {
                   <h1 style={{ color: 'white' }}>ہمارا مقصد</h1>
                   <h3 style={{ color: 'white' }}>
                     فوٹان سینڑل سکول کا مقصد بچوں کی مثبت و متوازن اسلامی اقدار
-                    کے مطابق تعلیم و تربیت کرنا ہے۔ تا کہ ہمارے بچے صحیح معنوں
+                    کے مطابق تعلیم و تربیت کرنا ہے تا کہ ہمارے بچے صحیح معنوں
                     میں اقبال کے شاہین اور مرد مومن بن کر معاشرے کے لیے روشنی
                     ثابت ہوں۔ ہر جگہ جن کے چمکنے سے اجالا ہو جائے۔ اس مقصد کو
                     پورا کرنے کیلئے اسلامی اور دینی طرز پر نصاب متعین کیا گیا
                     ہے۔ دور حاضر کی جدت میں ڈھالنے کے لیے کمپیوٹر کا نصاب ہر بچے
-                    کے لئے متعین کیا گیا ہے۔ اساتذہ کو خاص طریقے سے تربیت دی گئی
-                    ہے تاکہ وہ ہر بچے کو سمجھ سکیں۔ بچوں کو وقتاً فوقتاً
-                    اخلاقیات پر لیکچر دیا جاتا ہے تاکہ بچوں میں مثبت قدروں کی
-                    شجر کاری ہوتی رہے اور وہ آنے والے وقت میں ایک درخت بن کر اسے
-                    صراطِ مستقیم پر رہنے میں معاون ثابت ہو۔
+                    کے لئے متعین کیا گیا ہے۔ ہر بچے کی نفسیات کو سمجھنے کے لیے
+                    اساتذہ کے لیے خصوصی تربیت کا اہتمام کیا جاتا ہے۔ بچوں کو
+                    وقتاً فوقتاًاخلاقیات پر لیکچر دیا جاتا ہے تاکہ بچوں میں مثبت
+                    قدروں کی شجر کاری ہوتی رہے اور وہ آنے والے وقت میں ایک درخت
+                    بن کر اسے صراط مستقیم پر رہنے میں معاون ثابت ہو۔
                   </h3>
                 </div>
               </div>
