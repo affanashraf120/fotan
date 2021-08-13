@@ -9,7 +9,7 @@ import {
   FaQuoteRight,
 } from 'react-icons/fa';
 import { IoMdMailUnread } from 'react-icons/io';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { scroller } from 'react-scroll';
 import Ticker from 'react-ticker';
 import {
@@ -27,19 +27,19 @@ import {
 } from 'reactstrap';
 import GlideComponent from '../components/carousel/GlideComponent';
 import { Colxx } from '../components/common/CustomBootstrap';
-import AdminLoginModal from '../fotan/components/AdminLoginModal';
-import AnouncementPopup from '../fotan/components/AnouncementPopup';
-import LoginModal from '../fotan/components/LoginModal';
+// import AdminLoginModal from '../fotan/components/AdminLoginModal';
+// import AnouncementPopup from '../fotan/components/AnouncementPopup';
+// import LoginModal from '../fotan/components/LoginModal';
 import MapBlock from '../fotan/components/MapBlock';
 import { branchCards } from '../fotan/data/branchHandles';
 import cardList from '../fotan/data/cardItems';
 import footerMenuList from '../fotan/data/footerMenuList';
-import menuList from '../fotan/data/navMenuList';
+// import menuList from '../fotan/data/navMenuList';
 
 // const schoolPostor = '/assets/img/fotan/school.jpg';
 const chairPerson = '/assets/img/fotan/chairperson.jpeg';
 const footerLogo = '/assets/img/fotan/footer-logo.png';
-const logo = '/assets/img/fotan/logo.png';
+// const logo = '/assets/img/fotan/logo.png';
 
 const items = [
   {
@@ -130,18 +130,18 @@ const BranchCard = ({ title, img, detail, email }) => {
 
 const Home = (props) => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
-  const [adminLogin, setAdminLogin] = useState(false);
-  const [login, setLogin] = useState(false);
+  // const [adminLogin, setAdminLogin] = useState(false);
+  // const [login, setLogin] = useState(false);
   const [move, setMove] = useState(true);
   const refRowHome = useRef(null);
   const refSectionFooter = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
-  const [active, setActive] = useState(true);
+  // const [active, setActive] = useState(true);
 
-  const closeModal = () => {
-    setActive(false);
-  };
+  // const closeModal = () => {
+  //   setActive(false);
+  // };
 
   const { width } = props;
 
@@ -230,21 +230,21 @@ const Home = (props) => {
     return height;
   };
 
-  const openAdminLogin = () => {
-    setAdminLogin(true);
-  };
+  // const openAdminLogin = () => {
+  //   setAdminLogin(true);
+  // };
 
-  const closeAdminLogin = () => {
-    setAdminLogin(false);
-  };
+  // const closeAdminLogin = () => {
+  //   setAdminLogin(false);
+  // };
 
-  const openLogin = () => {
-    setLogin(true);
-  };
+  // const openLogin = () => {
+  //   setLogin(true);
+  // };
 
-  const closeLogin = () => {
-    setLogin(false);
-  };
+  // const closeLogin = () => {
+  //   setLogin(false);
+  // };
 
   const onWindowResize = (event) => {
     const homeRect = refRowHome.current.getBoundingClientRect();
@@ -298,131 +298,12 @@ const Home = (props) => {
         'show-mobile-menu': showMobileMenu,
       })}
     >
-      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
-      <div className="mobile-menu" onClick={(event) => event.stopPropagation()}>
-        <a
-          // className="logo-mobile c-pointer"
-          href="#scroll"
-          onClick={(event) => scrollTo(event, 'home')}
-        >
-          {/* <span /> */}
-          <img
-            className="footer-logo"
-            alt="footer logo"
-            width="200px"
-            src={logo}
-          />
-        </a>
-        <ul className="navbar-nav">
-          {menuList.map((item, index) => {
-            return item.id !== 'campuses' ? (
-              <li key={index} className="nav-item">
-                <Link className="c-pointer" to={item.url}>
-                  {item.name}
-                </Link>
-              </li>
-            ) : (
-              <li key={index} className="nav-item">
-                <a
-                  className="c-pointer"
-                  href="#scroll"
-                  onClick={(event) => scrollTo(event, 'campuses')}
-                >
-                  {item.name}
-                </a>
-              </li>
-            );
-          })}
-          <li className="nav-item">
-            <div className="separator" />
-          </li>
-          <li className="nav-item text-center">
-            <button
-              type="button"
-              className="btn btn-outline-primary btn-sm mobile-menu-cta"
-              onClick={openLogin}
-            >
-              Login
-            </button>
-          </li>
-          <li className="nav-item text-center">
-            <button
-              type="button"
-              className="btn btn-outline-primary btn-sm mobile-menu-cta"
-              onClick={openAdminLogin}
-            >
-              Admin
-            </button>
-          </li>
-        </ul>
-      </div>
+      {/* Mobile Navbar */}
 
       {/* Modals */}
-      <AdminLoginModal open={adminLogin} closeHandler={closeAdminLogin} />
-      <LoginModal open={login} closeHandler={closeLogin} />
-      {active && <AnouncementPopup handleClose={closeModal} />}
 
-      {/* Navbar */}
       <div className="main-container">
-        <div className="landing-page-nav">
-          <nav>
-            <div className="container d-flex align-items-center justify-content-between">
-              <a
-                // className="navbar-logo pull-left c-pointer"
-                href="/"
-                onClick={(event) => scrollTo(event, 'home')}
-              >
-                <div className="logo-img-container">
-                  <img alt="logo" src={logo} />
-                </div>
-              </a>
-              <ul className="navbar-nav d-none d-lg-flex flex-row">
-                {menuList.map((item, index) => {
-                  // href="#scroll"
-                  // onClick={(event) => scrollTo(event, 'home')}
-                  return item.id !== 'campuses' ? (
-                    <li key={index} className="nav-item">
-                      <Link className="c-pointer" to={item.url}>
-                        {item.name}
-                      </Link>
-                    </li>
-                  ) : (
-                    <li key={index} className="nav-item">
-                      <a
-                        className="c-pointer"
-                        href="#scroll"
-                        onClick={(event) => scrollTo(event, 'campuses')}
-                      >
-                        {item.name}
-                      </a>
-                    </li>
-                  );
-                })}
-                <li className="nav-item pl-4">
-                  <Button className="btn btn-shadow" onClick={openLogin}>
-                    Login
-                  </Button>
-                </li>
-                <li className="nav-item pl-4">
-                  <Button className="btn btn-shadow" onClick={openAdminLogin}>
-                    Admin
-                  </Button>
-                </li>
-              </ul>
-              {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
-              <span
-                className="mobile-menu-button"
-                onClick={(event) => {
-                  setShowMobileMenu(!showMobileMenu);
-                  event.stopPropagation();
-                }}
-              >
-                <i className="simple-icon-menu" />
-              </span>
-            </div>
-          </nav>
-        </div>
-
+        {/* Navbar */}
         {/* Image slider */}
         <div
           className="content-container"

@@ -1,3 +1,5 @@
+import routes from '../../routes';
+
 const menuList = [
   {
     id: 'home',
@@ -12,7 +14,7 @@ const menuList = [
   {
     id: 'jobs',
     name: 'Jobs',
-    url: '/',
+    url: routes.jobs(),
   },
   {
     id: 'campuses',

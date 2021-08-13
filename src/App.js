@@ -18,7 +18,11 @@ import {
 } from './constants/defaultValues';
 import { getDirection } from './helpers/Utils';
 import { ProtectedRoute } from './helpers/authHelper';
+import Navbar from './fotan/components/Navbar';
 
+const ViewJobs = React.lazy(() =>
+  import(/* webpackChunkName: "views" */ './views/jobs')
+);
 const ViewHome = React.lazy(() =>
   import(/* webpackChunkName: "views" */ './views/home')
 );
@@ -61,8 +65,10 @@ class App extends React.Component {
           <>
             <NotificationContainer />
             {isMultiColorActive && <ColorSwitcher />}
+
             <Suspense fallback={<div className="loading" />}>
               <Router>
+                <Navbar />
                 <Switch>
                   <ProtectedRoute
                     path={adminRoot}
@@ -87,6 +93,11 @@ class App extends React.Component {
                     path="/"
                     exact
                     render={(props) => <ViewHome {...props} />}
+                  />
+                  <Route
+                    path="/jobs"
+                    exact
+                    render={(props) => <ViewJobs {...props} />}
                   />
                   {/*
                   <Redirect exact from="/" to={adminRoot} />

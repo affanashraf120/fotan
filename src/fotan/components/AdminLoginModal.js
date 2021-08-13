@@ -53,6 +53,8 @@ const LoginModal = ({ open, closeHandler, width }) => {
     //
     if (data.email === emails.chairman && data.password === passwords.fotan) {
       history.push('/app');
+      setLoading(false);
+      closeHandler();
     } else {
       messageRef.current.innerText = 'Invalid email or password';
       setLoading(false);
