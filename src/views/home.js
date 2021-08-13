@@ -358,12 +358,8 @@ const Home = (props) => {
       </div>
 
       {/* Modals */}
-      <div style={{ boxSizing: 'border-box' }}>
-        <AdminLoginModal open={adminLogin} closeHandler={closeAdminLogin} />
-      </div>
-      <div style={{ boxSizing: 'border-box' }}>
-        <LoginModal open={login} closeHandler={closeLogin} />
-      </div>
+      <AdminLoginModal open={adminLogin} closeHandler={closeAdminLogin} />
+      <LoginModal open={login} closeHandler={closeLogin} />
       {active && <AnouncementPopup handleClose={closeModal} />}
 
       {/* Navbar */}

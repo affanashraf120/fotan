@@ -1,19 +1,18 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Typography } from '@material-ui/core';
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Divider,
+  Typography,
+  withWidth,
+} from '@material-ui/core';
 import React, { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
-import {
-  Button,
-  Form,
-  FormGroup,
-  Input,
-  Label,
-  Modal,
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-} from 'reactstrap';
+import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
+import styled from 'styled-components';
 import * as yup from 'yup';
 import IntlMessages from '../../helpers/IntlMessages';
 import { emails, passwords } from '../data/branchHandles';
@@ -23,7 +22,11 @@ const schema = yup.object().shape({
   password: yup.string().required('Password Required'),
 });
 
-const LoginModal = ({ open, closeHandler }) => {
+const StyledButton = styled(Button)`
+  margin: 1rem;
+`;
+
+const LoginModal = ({ open, closeHandler, width }) => {
   // const [messageError, setMessageError] = useState('');
   const history = useHistory();
   const messageRef = useRef();
@@ -58,13 +61,17 @@ const LoginModal = ({ open, closeHandler }) => {
 
   return (
     <>
-      <Modal isOpen={open} onClosed={closeHandler}>
-        <ModalHeader>Login As Admin</ModalHeader>
-        <ModalBody>
-          <Form
-            className="av-tooltip tooltip-label-bottom"
-            onSubmit={handleSubmit(submitHandler)}
-          >
+      {/* eslint-disable-next-line react/jsx-boolean-value */}
+      <Dialog
+        fullWidth
+        fullScreen={width === 'xs'}
+        open={open}
+        onClose={closeHandler}
+      >
+        <DialogTitle>Login as Admin</DialogTitle>
+
+        <DialogContent>
+          <Form onSubmit={handleSubmit(submitHandler)}>
             <FormGroup className="form-group">
               <Label>
                 <IntlMessages id="user.email" />
@@ -111,21 +118,22 @@ const LoginModal = ({ open, closeHandler }) => {
                 </span>
               </Button>
             </div>
+            <Typography
+              style={{ marginTop: '15px' }}
+              innerRef={messageRef}
+              color="error"
+            />
           </Form>
-          <Typography
-            style={{ marginTop: '15px' }}
-            innerRef={messageRef}
-            color="error"
-          />
-        </ModalBody>
-        <ModalFooter>
-          <Button color="secondary" onClick={closeHandler}>
+        </DialogContent>
+        <Divider />
+        <DialogActions>
+          <StyledButton color="secondary" onClick={closeHandler}>
             Cancel
-          </Button>
-        </ModalFooter>
-      </Modal>
+          </StyledButton>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };
 
-export default LoginModal;
+export default withWidth()(LoginModal);

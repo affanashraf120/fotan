@@ -1,19 +1,18 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Typography } from '@material-ui/core';
+import {
+  Typography,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Divider,
+  withWidth,
+} from '@material-ui/core';
+import styled from 'styled-components';
 import React, { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { NavLink, useHistory } from 'react-router-dom';
-import {
-  Button,
-  Form,
-  FormGroup,
-  Input,
-  Label,
-  Modal,
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-} from 'reactstrap';
+import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import * as yup from 'yup';
 import IntlMessages from '../../helpers/IntlMessages';
 
@@ -27,7 +26,11 @@ const schema = yup.object().shape({
   password: yup.string().required('Password Required'),
 });
 
-const LoginModal = ({ open, closeHandler }) => {
+const StyledButton = styled(Button)`
+  margin: 1rem;
+`;
+
+const LoginModal = ({ open, closeHandler, width }) => {
   // const [messageError, setMessageError] = useState('');
   const history = useHistory();
   const messageRef = useRef();
@@ -52,9 +55,15 @@ const LoginModal = ({ open, closeHandler }) => {
 
   return (
     <>
-      <Modal isOpen={open} onClosed={closeHandler}>
-        <ModalHeader>Login</ModalHeader>
-        <ModalBody>
+      {/* eslint-disable-next-line react/jsx-boolean-value */}
+      <Dialog
+        fullWidth
+        fullScreen={width === 'xs'}
+        open={open}
+        onClose={closeHandler}
+      >
+        <DialogTitle>Login</DialogTitle>
+        <DialogContent>
           <Form
             className="av-tooltip tooltip-label-bottom"
             onSubmit={handleSubmit(submitHandler)}
@@ -104,24 +113,27 @@ const LoginModal = ({ open, closeHandler }) => {
                   <IntlMessages id="user.login-button" />
                 </span>
               </Button>
-              <NavLink to="/user/forgot-password">
-                <IntlMessages id="user.forgot-password-question" />
-              </NavLink>
-              <NavLink to="/user/register">Create an account</NavLink>
             </div>
           </Form>
           <Typography innerRef={messageRef} color="error">
             {/* {messageError} */}
           </Typography>
-        </ModalBody>
-        <ModalFooter>
-          <Button color="secondary" onClick={closeHandler}>
+        </DialogContent>
+        <Divider />
+        <DialogActions
+          style={{ display: 'flex', justifyContent: 'space-around' }}
+        >
+          <NavLink to="/user/forgot-password">
+            <IntlMessages id="user.forgot-password-question" />
+          </NavLink>
+          <NavLink to="/user/register">Create an account</NavLink>
+          <StyledButton color="secondary" onClick={closeHandler}>
             Cancel
-          </Button>
-        </ModalFooter>
-      </Modal>
+          </StyledButton>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };
 
-export default LoginModal;
+export default withWidth()(LoginModal);
