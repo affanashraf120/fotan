@@ -2,17 +2,6 @@
   font-size: 1rem;
   line-height: 1.6rem;
   color: $secondary-color;
-  margin-bottom: $navbar-height;
-
-  @include respond-below(xl) {
-    margin-bottom: $navbar-height-md;
-  }
-
-  @include respond-below(sm) {
-    font-size: 0.9rem;
-    line-height: 1.4rem;
-    margin-bottom: $navbar-height-xs;
-  }
 
   .mobile-menu {
     position: fixed;
@@ -20,7 +9,7 @@
     bottom: 0;
     right: 0;
     transform: translateX(300px);
-    z-index: 25;
+    z-index: 31;
     width: 300px;
     background: $background-color;
     box-shadow: initial;
@@ -131,7 +120,7 @@
   }
 
   .landing-page-nav {
-    z-index: 100 !important;
+    z-index: 30 !important;
     top: 0;
     position: fixed;
     width: 100%;
@@ -535,15 +524,18 @@
   }
 
   .home-row {
-    padding-top: 180px;
-    margin-bottom: 70px;
+    padding-top: 100px;
 
     @include respond-below(xl) {
-      padding-top: 120px;
+      padding-top: $navbar-height-lg;
     }
 
-    @include respond-below(md) {
-      padding-top: 110px;
+    @include respond-below(lg) {
+      padding-top: $navbar-height-md;
+    }
+
+    @include respond-below(sm) {
+      padding-top: $navbar-height-xs;
     }
   }
 

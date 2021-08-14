@@ -6,7 +6,7 @@ import { Button } from 'reactstrap';
 import { scroller } from 'react-scroll';
 
 import AdminLoginModal from './AdminLoginModal';
-import AnouncementPopup from './AnouncementPopup';
+import AnouncementPopup from './AnouncmentPopup';
 import LoginModal from './LoginModal';
 import menuList from '../data/navMenuList';
 

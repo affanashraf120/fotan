@@ -1,24 +1,23 @@
 import React, { Suspense } from 'react';
+import { IntlProvider } from 'react-intl';
 import { connect } from 'react-redux';
 import {
   BrowserRouter as Router,
+  Redirect,
   Route,
   Switch,
-  Redirect,
 } from 'react-router-dom';
-import { IntlProvider } from 'react-intl';
-import './helpers/Firebase';
-import AppLocale from './lang';
 import ColorSwitcher from './components/common/ColorSwitcher';
 import { NotificationContainer } from './components/common/react-notifications';
 import {
-  isMultiColorActive,
   adminRoot,
+  isMultiColorActive,
   UserRole,
 } from './constants/defaultValues';
-import { getDirection } from './helpers/Utils';
 import { ProtectedRoute } from './helpers/authHelper';
-import Navbar from './fotan/components/Navbar';
+import './helpers/Firebase';
+import { getDirection } from './helpers/Utils';
+import AppLocale from './lang';
 
 const ViewJobs = React.lazy(() =>
   import(/* webpackChunkName: "views" */ './views/jobs')
@@ -68,7 +67,6 @@ class App extends React.Component {
 
             <Suspense fallback={<div className="loading" />}>
               <Router>
-                <Navbar />
                 <Switch>
                   <ProtectedRoute
                     path={adminRoot}
