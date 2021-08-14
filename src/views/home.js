@@ -1,6 +1,5 @@
 /* eslint-disable react/no-array-index-key, react/no-danger */
 import { withWidth } from '@material-ui/core';
-import classnames from 'classnames';
 import React, { useEffect, useRef, useState } from 'react';
 import {
   FaArrowRight,
@@ -27,19 +26,13 @@ import {
 } from 'reactstrap';
 import GlideComponent from '../components/carousel/GlideComponent';
 import { Colxx } from '../components/common/CustomBootstrap';
-// import AdminLoginModal from '../fotan/components/AdminLoginModal';
-// import AnouncementPopup from '../fotan/components/AnouncementPopup';
-// import LoginModal from '../fotan/components/LoginModal';
 import MapBlock from '../fotan/components/MapBlock';
 import { branchCards } from '../fotan/data/branchHandles';
 import cardList from '../fotan/data/cardItems';
 import footerMenuList from '../fotan/data/footerMenuList';
-// import menuList from '../fotan/data/navMenuList';
 
-// const schoolPostor = '/assets/img/fotan/school.jpg';
 const chairPerson = '/assets/img/fotan/chairperson.jpeg';
 const footerLogo = '/assets/img/fotan/footer-logo.png';
-// const logo = '/assets/img/fotan/logo.png';
 
 const items = [
   {
@@ -129,19 +122,11 @@ const BranchCard = ({ title, img, detail, email }) => {
 };
 
 const Home = (props) => {
-  const [showMobileMenu, setShowMobileMenu] = useState(false);
-  // const [adminLogin, setAdminLogin] = useState(false);
-  // const [login, setLogin] = useState(false);
   const [move, setMove] = useState(true);
-  const refRowHome = useRef(null);
-  const refSectionFooter = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
-  // const [active, setActive] = useState(true);
-
-  // const closeModal = () => {
-  //   setActive(false);
-  // };
+  const refRowHome = useRef(null);
+  const refSectionFooter = useRef(null);
 
   const { width } = props;
 
@@ -162,12 +147,12 @@ const Home = (props) => {
     setActiveIndex(newIndex);
   };
 
-  const slides = items.map((item) => {
+  const slides = items.map((item, index) => {
     return (
       <CarouselItem
         onExiting={() => setAnimating(true)}
         onExited={() => setAnimating(false)}
-        key={item.src}
+        key={index}
       >
         <img src={item.src} alt={item.altText} width="100%" />
         <CarouselCaption
@@ -183,27 +168,6 @@ const Home = (props) => {
   };
   const startMove = () => {
     setMove(true);
-  };
-
-  const getNavbarHeight = (screen) => {
-    let height;
-    switch (`${screen}`) {
-      case 'xl':
-        height = 100;
-        break;
-      case 'lg':
-        height = 90;
-        break;
-      case 'md':
-        height = 80;
-        break;
-      case 'sm':
-        height = 70;
-        break;
-      default:
-        height = 70;
-    }
-    return height;
   };
 
   const getMessageFontSize = (screen) => {
@@ -230,22 +194,6 @@ const Home = (props) => {
     return height;
   };
 
-  // const openAdminLogin = () => {
-  //   setAdminLogin(true);
-  // };
-
-  // const closeAdminLogin = () => {
-  //   setAdminLogin(false);
-  // };
-
-  // const openLogin = () => {
-  //   setLogin(true);
-  // };
-
-  // const closeLogin = () => {
-  //   setLogin(false);
-  // };
-
   const onWindowResize = (event) => {
     const homeRect = refRowHome.current.getBoundingClientRect();
 
@@ -253,30 +201,14 @@ const Home = (props) => {
     footerSection.style.backgroundPositionX = `${
       event.target.innerWidth - homeRect.x - 2000
     }px`;
-
-    if (event.target.innerWidth >= 992) {
-      setShowMobileMenu(false);
-    }
-  };
-
-  const onWindowClick = () => {
-    setShowMobileMenu(false);
-  };
-
-  const onWindowScroll = () => {
-    setShowMobileMenu(false);
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', onWindowScroll);
     window.addEventListener('resize', onWindowResize);
-    window.addEventListener('click', onWindowClick);
 
     document.body.classList.add('no-footer');
     return () => {
-      window.removeEventListener('scroll', onWindowScroll);
       window.removeEventListener('resize', onWindowResize);
-      window.removeEventListener('click', onWindowClick);
       document.body.classList.remove('no-footer');
     };
   }, []);
@@ -293,24 +225,10 @@ const Home = (props) => {
   };
 
   return (
-    <div
-      className={classnames('landing-page', {
-        'show-mobile-menu': showMobileMenu,
-      })}
-    >
-      {/* Mobile Navbar */}
-
-      {/* Modals */}
-
+    <div className="landing-page">
       <div className="main-container">
-        {/* Navbar */}
         {/* Image slider */}
-        <div
-          className="content-container"
-          id="home"
-          ref={refRowHome}
-          style={{ marginTop: `${getNavbarHeight(width)}px` }}
-        >
+        <div className="content-container" id="home" ref={refRowHome}>
           <Carousel activeIndex={activeIndex} next={next} previous={previous}>
             <CarouselIndicators
               items={items}
@@ -371,7 +289,7 @@ const Home = (props) => {
           </div>
 
           <div className="section mb-0">
-            <div className="container" id="features">
+            <div className="container">
               <div className="row">
                 <div className="col-12 offset-0 col-lg-8 offset-lg-2 text-center">
                   <h1 style={{ margin: '0' }}>Message of Worthy Chairman</h1>
@@ -478,9 +396,9 @@ const Home = (props) => {
                       },
                     }}
                   >
-                    {cardList.map((item) => {
+                    {cardList.map((item, index) => {
                       return (
-                        <div key={item.id}>
+                        <div key={index}>
                           <NoControlCarouselItem {...item} />
                         </div>
                       );
@@ -555,9 +473,9 @@ const Home = (props) => {
                         },
                       }}
                     >
-                      {branchCards.map((item) => {
+                      {branchCards.map((item, index) => {
                         return (
-                          <div key={item.id}>
+                          <div key={index}>
                             <BranchCard {...item} />
                           </div>
                         );

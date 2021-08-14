@@ -41,7 +41,7 @@ export const searchPath = `${adminRoot}/pages/miscellaneous/search`;
 export const servicePath = 'https://api.coloredstrategies.com';
 
 export const themeColorStorageKey = '__theme_selected_color';
-export const isMultiColorActive = true;
+export const isMultiColorActive = false;
 export const defaultColor = 'light.bluenavy';
 export const isDarkSwitchActive = true;
 export const defaultDirection = 'ltr';

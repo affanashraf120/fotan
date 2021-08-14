@@ -14,7 +14,6 @@ const logo = '/assets/img/fotan/logo.png';
 
 const Navbar = () => {
   const location = useLocation();
-  console.log(location.pathname);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [adminLogin, setAdminLogin] = useState(false);
   const [login, setLogin] = useState(false);

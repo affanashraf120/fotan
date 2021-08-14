@@ -76,6 +76,16 @@ class App extends React.Component {
                     roles={[UserRole.Admin, UserRole.Editor]}
                   />
                   <Route
+                    path="/"
+                    exact
+                    render={(props) => <ViewHome {...props} />}
+                  />
+                  <Route
+                    path="/jobs"
+                    exact
+                    render={(props) => <ViewJobs {...props} />}
+                  />
+                  <Route
                     path="/user"
                     render={(props) => <ViewUser {...props} />}
                   />
@@ -88,16 +98,6 @@ class App extends React.Component {
                     path="/unauthorized"
                     exact
                     render={(props) => <ViewUnauthorized {...props} />}
-                  />
-                  <Route
-                    path="/"
-                    exact
-                    render={(props) => <ViewHome {...props} />}
-                  />
-                  <Route
-                    path="/jobs"
-                    exact
-                    render={(props) => <ViewJobs {...props} />}
                   />
                   {/*
                   <Redirect exact from="/" to={adminRoot} />

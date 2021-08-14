@@ -150,7 +150,7 @@ const Title = styled.h3`
 
 const Modal = styled.div`
   position: fixed; /* Stay in place */
-  z-index: 100; /* Sit on top */
+  z-index: 500; /* Sit on top */
   left: 0;
   top: 0;
   display: flex;

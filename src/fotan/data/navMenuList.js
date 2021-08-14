@@ -4,12 +4,12 @@ const menuList = [
   {
     id: 'home',
     name: 'Home',
-    url: '/',
+    url: routes.home(),
   },
   {
     id: 'academics',
     name: 'Academics',
-    url: '/',
+    url: routes.home(),
   },
   {
     id: 'jobs',
@@ -19,7 +19,7 @@ const menuList = [
   {
     id: 'campuses',
     name: 'Campuses',
-    url: '/',
+    url: routes.home(),
   },
   {
     id: 'admissions',
@@ -29,10 +29,12 @@ const menuList = [
       { id: 'matric', name: 'Matriculation', url: '/' },
       { id: 'intermediate', name: 'Intermediate', url: '/' },
     ],
+    url: routes.home(),
   },
   {
     id: 'photo-gallery',
     name: 'Photo Gallery',
+    url: routes.home(),
   },
   {
     id: 'contact',
@@ -45,6 +47,7 @@ const menuList = [
         url: '/',
       },
     ],
+    url: routes.home(),
   },
 ];
 
