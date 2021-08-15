@@ -19,11 +19,8 @@ import './helpers/Firebase';
 import { getDirection } from './helpers/Utils';
 import AppLocale from './lang';
 
-const ViewJobs = React.lazy(() =>
-  import(/* webpackChunkName: "views" */ './views/jobs')
-);
 const ViewHome = React.lazy(() =>
-  import(/* webpackChunkName: "views" */ './views/home')
+  import(/* webpackChunkName: "views" */ './views')
 );
 const ViewApp = React.lazy(() =>
   import(/* webpackChunkName: "views-app" */ './views/app')
@@ -74,19 +71,10 @@ class App extends React.Component {
                     roles={[UserRole.Admin, UserRole.Editor]}
                   />
                   <Route
-                    path="/"
-                    exact
-                    render={(props) => <ViewHome {...props} />}
-                  />
-                  <Route
-                    path="/jobs"
-                    exact
-                    render={(props) => <ViewJobs {...props} />}
-                  />
-                  <Route
                     path="/user"
                     render={(props) => <ViewUser {...props} />}
                   />
+                  <Route path="/" render={(props) => <ViewHome {...props} />} />
                   <Route
                     path="/error"
                     exact

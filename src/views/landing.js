@@ -27,7 +27,6 @@ import {
 import GlideComponent from '../components/carousel/GlideComponent';
 import { Colxx } from '../components/common/CustomBootstrap';
 import MapBlock from '../fotan/components/MapBlock';
-import NavbarContainer from '../fotan/components/NavbarContainer';
 import { branchCards } from '../fotan/data/branchHandles';
 import cardList from '../fotan/data/cardItems';
 import footerMenuList from '../fotan/data/footerMenuList';
@@ -122,7 +121,7 @@ const BranchCard = ({ title, img, detail, email }) => {
   );
 };
 
-const Home = (props) => {
+const Page = (props) => {
   const [move, setMove] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
@@ -229,7 +228,7 @@ const Home = (props) => {
   };
 
   return (
-    <NavbarContainer>
+    <>
       <div className="content-container" id="home">
         <div ref={refSectionHome}>
           <div className="row home-row" ref={refRowHome}>
@@ -601,8 +600,8 @@ const Home = (props) => {
           </div>
         </div>
       </div>
-    </NavbarContainer>
+    </>
   );
 };
 
-export default withWidth()(Home);
+export default withWidth()(Page);

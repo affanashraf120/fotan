@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import routes from '../routes';
 
 const greenX = `#00c37d`;
-const greenXX = `#baeada`;
+// const greenXX = `#baeada`;
 // const greenXXX = `#e3f4ee`;
 const title = `#464646`;
 // const subtitle = `#959595`;
@@ -18,26 +18,25 @@ const Title = styled.h2`
   font-size: xx-large;
 `;
 
-const Label = styled.div`
-  align-self: center;
-  width: 100%;
-  border-radius: 1rem;
-  text-align: center;
-  background-color: ${greenXX};
-  color: ${greenX};
-  font-size: xx-large;
-  font-weight: bolder;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-`;
+// const Label = styled.div`
+//   align-self: center;
+//   width: 100%;
+//   padding: 1rem;
+//   border-radius: 1rem;
+//   text-align: center;
+//   background-color: ${greenXX};
+//   color: ${greenX};
+//   font-size: xx-large;
+//   font-weight: bolder;
+//   margin-top: 1rem;
+//   margin-bottom: 1rem;
+// `;
 
 const Highlight = styled.p`
   text-align: center;
   font-size: x-large;
   font-weight: bold;
   color: ${title};
-  /* background-color: ${greenX}; */
-  /* padding: 1rem; */
   @media screen and (max-width: 600px) {
     font-size: large;
   }
@@ -53,14 +52,6 @@ const Important = styled.p`
     font-size: large;
   }
 `;
-
-// const Text = styled.p`
-//   text-align: center;
-//   color: ${subtitle};
-//   font-size: large;
-//   font-weight: 900;
-//   margin: 1rem;
-// `;
 
 const TextBox = styled.div`
   align-self: center;
@@ -80,7 +71,9 @@ const StyledButton = styled(Button)`
   margin: 1rem;
 `;
 
-const Container = styled.div`
+const Container = styled.div.attrs(() => ({
+  className: 'home-row',
+}))`
   display: flex;
   flex-direction: column;
 `;
@@ -88,10 +81,13 @@ const Container = styled.div`
 const Page = () => {
   const history = useHistory();
   const handleLogin = () => {
-    history.push(routes.login());
+    // history.push(routes.login());
+  };
+  const handleRegister = () => {
+    history.push(routes.register());
   };
   return (
-    <Container className="top-margin">
+    <Container>
       <Title>فوٹان جاب پورٹل میں خوش آمدید</Title>
       <Title>IF YOU HAVE ALREADY REGISTERED PLEASE LOGIN</Title>
       <StyledButton onClick={handleLogin}>Login</StyledButton>
@@ -111,15 +107,14 @@ const Page = () => {
           لےگا۔
         </Highlight>
         <Important>رجسٹر کرنے کے لیے نیچے دیے گئے بٹن پر کلک کریں</Important>
-        <Highlight>
+        <Highlight dir="rtl">
           نوٹ: یہاں دیے گئے آپ کے فون نمبرز اور ای میلز ہر لحاظ سے محفوظ ہوں گے
           کوئی بھی آپ سے رابطہ کے لیے صرف &quot; رابطہ &quot; کے بٹن پر کلک کر
           کے آپ کو ای میل اور sms بھیج سکتا ہے آپ کا فون نمبر کسی کو نظر نہیں
           آئے گا
         </Highlight>
       </TextBox>
-
-      <Label>Register</Label>
+      <StyledButton onClick={handleRegister}>Register</StyledButton>
     </Container>
   );
 };

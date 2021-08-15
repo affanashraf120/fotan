@@ -120,13 +120,10 @@ const LoginModal = ({ open, closeHandler, width }) => {
           </Typography>
         </DialogContent>
         <Divider />
-        <DialogActions
-          style={{ display: 'flex', justifyContent: 'space-around' }}
-        >
+        <DialogActions style={{ display: 'flex', justifyContent: 'flex-end' }}>
           <NavLink to="/user/forgot-password">
             <IntlMessages id="user.forgot-password-question" />
           </NavLink>
-          <NavLink to="/user/register">Create an account</NavLink>
           <StyledButton color="secondary" onClick={closeHandler}>
             Cancel
           </StyledButton>
