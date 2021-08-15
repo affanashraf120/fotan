@@ -4,8 +4,17 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { Input } from 'reactstrap';
+import {
+  Button,
+  FormGroup,
+  Input,
+  InputGroup,
+  InputGroupAddon,
+  InputGroupText,
+  Label,
+} from 'reactstrap';
 import styled from 'styled-components';
+import InputMask from 'react-input-mask';
 import { Colxx } from '../components/common/CustomBootstrap';
 import TimeRangePicker from '../fotan/components/TimeRangePicker';
 
@@ -17,6 +26,12 @@ const Container = styled.div.attrs(() => ({
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: white;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
 `;
 const Title1 = styled.h2`
   text-align: center;
@@ -28,6 +43,12 @@ const Title1 = styled.h2`
 
 const Title2 = styled.h3`
   text-align: center;
+`;
+
+const CNICInput = styled(InputMask)`
+  padding: 0.5rem;
+  margin: 0.5rem;
+  outline: none;
 `;
 
 const timeShifts = [
@@ -81,9 +102,8 @@ const Page = () => {
       <Title1>Register</Title1>
       <Colxx xxs="12" md="10">
         <FormProvider {...methods}>
-          <form onSubmit={handleSubmit(asyncRegister)}>
+          <Form onSubmit={handleSubmit(asyncRegister)}>
             <FormControl
-              required
               //   error={error}
               component="fieldset"
             >
@@ -113,12 +133,97 @@ const Page = () => {
                   label="Customized time"
                 />
               </RadioGroup>
-              {customTime && <TimeRangePicker control={control} />}
+              <TimeRangePicker disabled={!customTime} control={control} />
               <FormHelperText>{/* Error Message */}</FormHelperText>
             </FormControl>
 
-            <Input type="submit" value="Next" />
-          </form>
+            <FormControl component="fieldset">
+              <Title2>You can contract for how many months ?</Title2>
+              <FormControl>
+                <Input
+                  type="select"
+                  {...register('months', { required: true })}
+                >
+                  <option>Six</option>
+                  <option>Three</option>
+                  <option>Twelve</option>
+                </Input>
+              </FormControl>
+            </FormControl>
+
+            <div className="section mb-0">
+              <Title2>Applicant’s Bio data</Title2>
+              <FormGroup className="form-group">
+                <Label>Applicant’s Name</Label>
+                <Input
+                  className="form-control"
+                  name="Applicant’s Name"
+                  type="text"
+                />
+              </FormGroup>
+              <FormGroup className="form-group">
+                <Label>Father’s Name</Label>
+                <Input
+                  className="form-control"
+                  name="Father’s Name"
+                  type="text"
+                />
+              </FormGroup>
+              <FormGroup className="form-group">
+                <Label>Age Approximately</Label>
+                <Input
+                  className="form-control"
+                  name="Age Approximately"
+                  type="number"
+                />
+              </FormGroup>
+
+              <FormGroup className="form-group ">
+                <Label>CNIC</Label>
+                <CNICInput mask="99999-9999999-9" />
+              </FormGroup>
+
+              <FormGroup className="form-group">
+                <Label>Email</Label>
+                <Input className="form-control" name="Email" type="email" />
+              </FormGroup>
+
+              <FormGroup>
+                <InputGroup>
+                  <InputGroupAddon addonType="prepend">
+                    <span className="input-group-text">Contact Numbers</span>
+                  </InputGroupAddon>
+                  <Input />
+                  <Input />
+                </InputGroup>
+              </FormGroup>
+
+              <FormGroup>
+                <Label>Marital Status</Label>
+                <Input type="select">
+                  <option value="Single">Single</option>
+                  <option value="married">Married</option>
+                </Input>
+              </FormGroup>
+
+              <InputGroup className="mb-3">
+                <InputGroupAddon addonType="prepend">
+                  <InputGroupText>Cost</InputGroupText>
+                  <InputGroupText>₨</InputGroupText>
+                </InputGroupAddon>
+                <Input />
+              </InputGroup>
+
+              <FormGroup className="form-group">
+                <Label>Address</Label>
+                <Input className="form-control" name="Address" type="text" />
+              </FormGroup>
+            </div>
+
+            <Button style={{ margin: '1rem' }} type="submit">
+              Next
+            </Button>
+          </Form>
         </FormProvider>
       </Colxx>
     </Container>

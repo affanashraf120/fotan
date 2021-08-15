@@ -2,7 +2,7 @@ import { TimePicker } from 'antd';
 import React from 'react';
 import { useController } from 'react-hook-form';
 
-export default function ResponsiveTimePickers({ control }) {
+export default function ResponsiveTimePickers({ disabled, control }) {
   const {
     field: { ...inputProps },
   } = useController({
@@ -12,6 +12,7 @@ export default function ResponsiveTimePickers({ control }) {
   return (
     <div>
       <TimePicker.RangePicker
+        disabled={disabled}
         size="large"
         order
         format="HH:mm"

@@ -38,6 +38,7 @@
     "react-hook-form": "^7.12.2",
     "react-icons": "^4.2.0",
     "react-image-lightbox": "^5.1.1",
+    "react-input-mask": "^2.0.4",
     "react-intl": "5.10.15",
     "react-lines-ellipsis": "^0.14.1",
     "react-perfect-scrollbar": "^1.5.8",
