@@ -3,21 +3,25 @@ import {
   FormGroup as MaterialFormGroup,
   Radio,
   RadioGroup,
+  Stepper,
+  StepLabel,
+  Step,
 } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { FaArrowRight } from 'react-icons/fa';
 import InputMask from 'react-input-mask';
 import {
   Button,
   Col,
+  Container,
   FormGroup,
   Input,
   InputGroup,
   Label,
-  Container,
 } from 'reactstrap';
 import styled from 'styled-components';
 import TimeRangePicker from '../fotan/components/TimeRangePicker';
@@ -32,6 +36,11 @@ const CustomContainer = styled.div.attrs(() => ({
   align-items: center;
   background-color: white;
   padding: 0.5rem;
+`;
+
+const BlockSpace = styled.div`
+  width: 100%;
+  margin-top: 50px;
 `;
 
 const Form = styled.form`
@@ -49,6 +58,12 @@ const Title1 = styled.h2`
 
 const Title2 = styled.h3`
   text-align: center;
+`;
+
+const NextButton = styled(Button)`
+  margin: 1rem;
+  width: 100px;
+  align-self: flex-end;
 `;
 
 const timeShifts = [
@@ -102,6 +117,15 @@ const Page = () => {
       <Title1>Register</Title1>
       <Container>
         <Col xs="12" md="8" style={{ margin: 'auto' }}>
+          <Stepper alternativeLabel activeStep={1}>
+            {['Step 1/5', 'Step 2/5', 'Step 3/5', 'Step 4/5', 'Step 5/5'].map(
+              (label) => (
+                <Step key={label}>
+                  <StepLabel>{label}</StepLabel>
+                </Step>
+              )
+            )}
+          </Stepper>
           <FormProvider {...methods}>
             <Form onSubmit={handleSubmit(asyncRegister)}>
               <FormControl>
@@ -126,6 +150,8 @@ const Page = () => {
                 <FormHelperText>{/* Error Message */}</FormHelperText>
               </FormControl>
 
+              <BlockSpace />
+
               <FormControl component="fieldset">
                 <Title2>You can contract for how many months ?</Title2>
                 <FormControl>
@@ -139,6 +165,8 @@ const Page = () => {
                   </Input>
                 </FormControl>
               </FormControl>
+
+              <BlockSpace />
 
               <Title2>Applicant’s Bio data</Title2>
               <FormGroup className="form-group">
@@ -224,9 +252,12 @@ const Page = () => {
                 <Input className="form-control" name="Address" type="text" />
               </FormGroup>
 
-              <Button style={{ margin: '1rem' }} type="submit">
+              <NextButton type="submit">
                 Next
-              </Button>
+                <FaArrowRight
+                  style={{ marginLeft: '5px', fontWeight: 'bolder' }}
+                />
+              </NextButton>
             </Form>
           </FormProvider>
         </Col>
