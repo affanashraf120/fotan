@@ -96,7 +96,16 @@ const NavbarContainer = (props) => {
           {menuList.map((item) => {
             return item.id !== 'campuses' ? (
               <li key={item.id} className="nav-item">
-                <Link className="c-pointer" to={item.url}>
+                <Link
+                  className="c-pointer"
+                  style={{
+                    color: 'black',
+                  }}
+                  onClick={() => {
+                    setShowMobileMenu(false);
+                  }}
+                  to={item.url}
+                >
                   {item.name}
                 </Link>
               </li>
@@ -105,7 +114,13 @@ const NavbarContainer = (props) => {
                 <a
                   className="c-pointer"
                   href="#scroll"
-                  onClick={(event) => scrollTo(event, 'campuses')}
+                  style={{
+                    color: 'black',
+                  }}
+                  onClick={(event) => {
+                    scrollTo(event, 'campuses');
+                    setShowMobileMenu(false);
+                  }}
                 >
                   {item.name}
                 </a>

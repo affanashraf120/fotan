@@ -1,35 +1,41 @@
-import { Radio, RadioGroup } from '@material-ui/core';
+import {
+  Checkbox,
+  FormGroup as MaterialFormGroup,
+  Radio,
+  RadioGroup,
+} from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import React, { useState } from 'react';
+import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import InputMask from 'react-input-mask';
 import {
   Button,
+  Col,
   FormGroup,
   Input,
   InputGroup,
-  InputGroupAddon,
-  InputGroupText,
   Label,
+  Container,
 } from 'reactstrap';
 import styled from 'styled-components';
-import InputMask from 'react-input-mask';
-import { Colxx } from '../components/common/CustomBootstrap';
 import TimeRangePicker from '../fotan/components/TimeRangePicker';
 
 const title = `#464646`;
 
-const Container = styled.div.attrs(() => ({
+const CustomContainer = styled.div.attrs(() => ({
   className: 'home-row',
 }))`
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: white;
+  padding: 0.5rem;
 `;
 
 const Form = styled.form`
+  margin: auto;
   display: flex;
   flex-direction: column;
 `;
@@ -43,12 +49,6 @@ const Title1 = styled.h2`
 
 const Title2 = styled.h3`
   text-align: center;
-`;
-
-const CNICInput = styled(InputMask)`
-  padding: 0.5rem;
-  margin: 0.5rem;
-  outline: none;
 `;
 
 const timeShifts = [
@@ -91,67 +91,55 @@ const timeShifts = [
 
 const Page = () => {
   const methods = useForm();
-  const [customTime, setCustomTime] = useState(false);
+  // const [customTime, setCustomTime] = useState(false);
   const { register, handleSubmit, control } = methods;
 
   const asyncRegister = (data) => {
     console.log(data);
   };
   return (
-    <Container>
+    <CustomContainer>
       <Title1>Register</Title1>
-      <Colxx xxs="12" md="10">
-        <FormProvider {...methods}>
-          <Form onSubmit={handleSubmit(asyncRegister)}>
-            <FormControl
-              //   error={error}
-              component="fieldset"
-            >
-              <Title2>
-                I am going to Apply for teaching/available time (Pick one)
-              </Title2>
-              <RadioGroup
-                {...register('time', {
-                  required: true,
-                })}
-                onChange={(e) => {
-                  if (e.target.value === 'custom') setCustomTime(true);
-                  else setCustomTime(false);
-                }}
-              >
-                {timeShifts.map((item) => (
-                  <FormControlLabel
-                    key={item.id}
-                    value={item.time}
-                    control={<Radio />}
-                    label={item.detail}
-                  />
-                ))}
-                <FormControlLabel
-                  value="custom"
-                  control={<Radio />}
-                  label="Customized time"
-                />
-              </RadioGroup>
-              <TimeRangePicker disabled={!customTime} control={control} />
-              <FormHelperText>{/* Error Message */}</FormHelperText>
-            </FormControl>
-
-            <FormControl component="fieldset">
-              <Title2>You can contract for how many months ?</Title2>
+      <Container>
+        <Col xs="12" md="8" style={{ margin: 'auto' }}>
+          <FormProvider {...methods}>
+            <Form onSubmit={handleSubmit(asyncRegister)}>
               <FormControl>
-                <Input
-                  type="select"
-                  {...register('months', { required: true })}
-                >
-                  <option>Six</option>
-                  <option>Three</option>
-                  <option>Twelve</option>
-                </Input>
+                <Title2>
+                  I am going to Apply for teaching/available time (Tick any one)
+                </Title2>
+                <MaterialFormGroup>
+                  {timeShifts.map((item) => (
+                    <FormControlLabel
+                      key={item.id}
+                      control={<Checkbox />}
+                      label={item.detail}
+                    />
+                  ))}
+                  <FormControlLabel
+                    control={<Checkbox />}
+                    label="Customized Time"
+                    onChange={(e) => console.log(e.target)}
+                  />
+                </MaterialFormGroup>
+                <TimeRangePicker control={control} />
+                <FormHelperText>{/* Error Message */}</FormHelperText>
               </FormControl>
-            </FormControl>
 
-            <div className="section mb-0">
+              <FormControl component="fieldset">
+                <Title2>You can contract for how many months ?</Title2>
+                <FormControl>
+                  <Input
+                    type="select"
+                    {...register('months', { required: true })}
+                  >
+                    <option>One year</option>
+                    <option>Three months</option>
+                    <option>Six months</option>
+                  </Input>
+                </FormControl>
+              </FormControl>
+
               <Title2>Applicant’s Bio data</Title2>
               <FormGroup className="form-group">
                 <Label>Applicant’s Name</Label>
@@ -161,6 +149,7 @@ const Page = () => {
                   type="text"
                 />
               </FormGroup>
+
               <FormGroup className="form-group">
                 <Label>Father’s Name</Label>
                 <Input
@@ -169,6 +158,7 @@ const Page = () => {
                   type="text"
                 />
               </FormGroup>
+
               <FormGroup className="form-group">
                 <Label>Age Approximately</Label>
                 <Input
@@ -180,7 +170,9 @@ const Page = () => {
 
               <FormGroup className="form-group ">
                 <Label>CNIC</Label>
-                <CNICInput mask="99999-9999999-9" />
+                <InputMask mask="99999-9999999-9">
+                  {(inputProps) => <Input {...inputProps} />}
+                </InputMask>
               </FormGroup>
 
               <FormGroup className="form-group">
@@ -189,44 +181,57 @@ const Page = () => {
               </FormGroup>
 
               <FormGroup>
+                <Label>Contact Numbers</Label>
                 <InputGroup>
-                  <InputGroupAddon addonType="prepend">
-                    <span className="input-group-text">Contact Numbers</span>
-                  </InputGroupAddon>
-                  <Input />
-                  <Input />
+                  <InputMask mask="9999-9999999">
+                    {(inputProps) => (
+                      <Input {...inputProps} placeholder="1st contact no." />
+                    )}
+                  </InputMask>
+                  <InputMask mask="9999-9999999">
+                    {(inputProps) => (
+                      <Input {...inputProps} placeholder="2nd contact no." />
+                    )}
+                  </InputMask>
                 </InputGroup>
               </FormGroup>
 
               <FormGroup>
                 <Label>Marital Status</Label>
-                <Input type="select">
-                  <option value="Single">Single</option>
-                  <option value="married">Married</option>
-                </Input>
+                <FormControl style={{ display: 'block' }}>
+                  <RadioGroup {...register('maritalStatus')}>
+                    <FormControlLabel
+                      value="single"
+                      control={<Radio />}
+                      label="Single"
+                    />
+                    <FormControlLabel
+                      value="married"
+                      control={<Radio />}
+                      label="Married"
+                    />
+                  </RadioGroup>
+                </FormControl>
               </FormGroup>
 
-              <InputGroup className="mb-3">
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText>Cost</InputGroupText>
-                  <InputGroupText>₨</InputGroupText>
-                </InputGroupAddon>
-                <Input />
-              </InputGroup>
+              <FormGroup>
+                <Label>Cast</Label>
+                <Input type="text" />
+              </FormGroup>
 
               <FormGroup className="form-group">
                 <Label>Address</Label>
                 <Input className="form-control" name="Address" type="text" />
               </FormGroup>
-            </div>
 
-            <Button style={{ margin: '1rem' }} type="submit">
-              Next
-            </Button>
-          </Form>
-        </FormProvider>
-      </Colxx>
-    </Container>
+              <Button style={{ margin: '1rem' }} type="submit">
+                Next
+              </Button>
+            </Form>
+          </FormProvider>
+        </Col>
+      </Container>
+    </CustomContainer>
   );
 };
 
