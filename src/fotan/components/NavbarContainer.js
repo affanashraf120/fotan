@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { scroller } from 'react-scroll';
 import { Button } from 'reactstrap';
 import menuList from '../data/navMenuList';
@@ -11,6 +11,7 @@ import LoginModal from './LoginModal';
 const logo = '/assets/img/fotan/logo.png';
 
 const NavbarContainer = (props) => {
+  const location = useLocation();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [adminLogin, setAdminLogin] = useState(false);
   const [login, setLogin] = useState(false);
@@ -154,7 +155,10 @@ const NavbarContainer = (props) => {
       {/* Modals */}
       <AdminLoginModal open={adminLogin} closeHandler={closeAdminLogin} />
       <LoginModal open={login} closeHandler={closeLogin} />
-      {active && <AnouncmentPopup handleClose={closeModal} />}
+
+      {location.pathname === '/' && active && (
+        <AnouncmentPopup handleClose={closeModal} />
+      )}
 
       {/* Navbar */}
       <div className="main-container">

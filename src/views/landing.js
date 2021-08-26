@@ -304,7 +304,7 @@ const Page = (props) => {
 
           <div style={{ marginTop: '1rem' }} />
 
-          <div className="row feature-row">
+          <div>
             <Container>
               <Row>
                 <Col xs="12" sm={{ size: 3, order: 1 }}>
